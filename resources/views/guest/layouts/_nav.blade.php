@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-light">
+<nav class="navbar navbar-expand-lg  bg-light shadow-sm">
     <div class="container-fluid px-4">
         <a class="navbar-brand me-costum" href="#">
             <img src="{{ asset('/img/logo.png') }}" alt="logo" width="70" height="50">
@@ -23,9 +23,9 @@
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form> --}}
-            <div class="btn-lg">
+            <div class="btn-md">
                 <a href="/signin" class="btn btn-outline-danger me-2">Sign In</a>
-                <a href="#" class="btn btn-danger">Sign Up</a>
+                <a href="/signup" class="btn btn-danger">Sign Up</a>
             </div>
         </div>
     </div>
