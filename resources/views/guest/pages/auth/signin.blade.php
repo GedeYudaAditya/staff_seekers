@@ -25,10 +25,10 @@
 
                 </div>
                 <h1 class="h3 mb-3 fw-normal text-center text-danger">Sign In</h1>
-                <form action="/login" method="post" class="form-control-sm">
+                <form action="{{ route('signin.proccess') }}" method="post">
                     @csrf
-                    <div class="form-floating mb-2">
-                        <input type="email" name="email" class="form-control  @error ('email') is-invalid @enderror"
+                    <div class="form-floating mb-4">
+                        <input type="email" name="email" class="form-control  @error('email') is-invalid @enderror"
                             id="email" placeholder="name@example.com" autofocus required value="{{ old('email') }}">
                         <label for="email">Email address</label>
                         @error('email')
@@ -49,7 +49,7 @@
                             </small>
                         </div>
                         <div class="col">
-                            <small class="d-block text-end"><a href="#" class="text-decoration-none text-black-50">Lupa
+                            <small class="d-block text-end"><a href="#" class="text-decoration-none text-danger">Lupa
                                     password?</a>
                             </small>
                         </div>

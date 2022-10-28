@@ -1,8 +1,7 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\SigninController;
-use App\Http\Controllers\SignupController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +15,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',[HomeController::class, 'index'])->name('home');
-Route::get('/signin',[SigninController::class, 'index'])->name('signin');
-Route::get('/signup',[SignupController::class, 'index'])->name('signup');
+
+// Not authenticated user group
+Route::group(['middleware' => 'guest'], function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+
+    Route::get('/signin', [AuthController::class, 'index'])->name('Auth');
+    Route::post('/signin', [AuthController::class, 'signin'])->name('signin.proccess');
+
+    Route::get('/register', [AuthController::class, 'register'])->name('register'); // View masih belum isi
+    Route::post('/register', [AuthController::class, 'registerProccess'])->name('register.proccess');
+});
+
+// Authenticate user group
+Route::group(['middleware' => 'auth'], function () {
+    Route::prefix('/staff')->group(function () {
+        Route::get('/', [HomeController::class, 'staff'])->name('staff.home');
+    });
+
+    Route::prefix('/villa')->group(function () {
+        Route::get('/', [HomeController::class, 'villa'])->name('villa.home');
+    });
+
+    Route::post('/signout', [AuthController::class, 'signout'])->name('signout');
+});
