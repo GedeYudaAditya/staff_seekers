@@ -10,7 +10,8 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item me-4">
-                    <a class="nav-link {{ Request::is('/*') ? 'active' : '' }}" aria-current="page" href="/">Home</a>
+                    <a class="nav-link {{ Request::is('/*') ? 'active' : '' }}" aria-current="page"
+                        href="/">Home</a>
                 </li>
                 <li class="nav-item me-4">
                     <a class="nav-link" href="#">Staff</a>
@@ -24,18 +25,18 @@
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form> --}}
             @auth
-            <div class="btn-lg">
-                <a href="/dashboard" class="btn btn-outline-danger me-2">Dashboard</a>
-                <form action="{{ route('signout') }}">
-                    @csrf
-                    <button type="submit" class="btn btn-danger">Logout</button>
-                </form>
-            </div>
+                <div class="btn-lg">
+                    <form action="{{ route('signout') }}" method="POST">
+                        <a href="/dashboard" class="btn btn-outline-danger me-2">Manage</a>
+                        @csrf
+                        <button type="submit" class="btn btn-danger">Logout</button>
+                    </form>
+                </div>
             @else
-            <div class="btn-lg">
-                <a href="{{ route('Auth') }}" class="btn btn-outline-danger me-2">Sign In</a>
-                <a href="#" class="btn btn-danger">Sign Up</a>
-            </div>
+                <div class="btn-lg">
+                    <a href="{{ route('Auth') }}" class="btn btn-outline-danger me-2">Sign In</a>
+                    <a href="{{ route('register') }}" class="btn btn-danger">Sign Up</a>
+                </div>
             @endauth
         </div>
     </div>

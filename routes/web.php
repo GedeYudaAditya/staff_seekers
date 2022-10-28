@@ -23,8 +23,8 @@ Route::group(['middleware' => 'guest'], function () {
     Route::get('/signin', [AuthController::class, 'index'])->name('Auth');
     Route::post('/signin', [AuthController::class, 'signin'])->name('signin.proccess');
 
-    Route::get('/register', [AuthController::class, 'register'])->name('register'); // View masih belum isi
-    Route::post('/register', [AuthController::class, 'registerProccess'])->name('register.proccess');
+    Route::get('/signup', [AuthController::class, 'signup'])->name('register');
+    Route::post('/signup', [AuthController::class, 'signupProccess'])->name('register.proccess');
 });
 
 // Authenticate user group
