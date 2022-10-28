@@ -60,40 +60,57 @@ class AuthController extends Controller
         return redirect()->route('home');
     }
 
-    public function register()
+    public function signup()
     {
-        return view('guest.pages.auth.register', [
-            'title' => 'Register',
-            'active' => 'register'
+        return view('guest.pages.auth.signup', [
+            'title' => 'Sign Up',
+            'active' => 'signup'
         ]);
     }
 
-    public function registerProccess(Request $request)
+    public function signupProccess(Request $request)
     {
         // Validate the form
         $credentials = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255', 'unique:users'],
             'email' => ['required', 'email', 'unique:users'],
-            'role' => ['required', 'string'],
-            'password' => ['required', 'confirmed'],
+            'role' => ['required'],
+            'password' => ['required'],
+            'password_confirmation' => 'required|min:8|same:password',
         ]);
 
         try {
             DB::beginTransaction();
 
             // Create the user with service
-            $user = UserDataServices::create($credentials);
+            $user = User::create([
+                'name' => $credentials['name'],
+                'username' => $credentials['username'],
+                'email' => $credentials['email'],
+                'role' => $credentials['role'],
+                'password' => Hash::make($credentials['password']),
+            ]);
 
             DB::commit();
 
             // Sign in the user
             Auth::login($user);
 
-            return redirect()->route('home');
+            $role = Auth::user()->role;
+
+            if ($role == 'admin') {
+                return redirect()->route('admin.home');
+            } else if ($role == 'staff') {
+                return redirect()->route('staff.home');
+            } else if ($role == 'villa') {
+                return redirect()->route('villa.home');
+            } else {
+                return redirect()->route('home');
+            }
         } catch (Expectation $e) {
             dd($e);
-            return back()->withErrors('error', $e);
+            // return back()->withErrors('error', $e);
         }
     }
 }
