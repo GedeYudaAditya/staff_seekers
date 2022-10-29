@@ -10,10 +10,11 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item me-4">
-                    <a class="nav-link {{ (Request::is('/*')) ? 'active' : ''}}" aria-current="page" href="/">Home</a>
+                    <a class="nav-link {{ Request::is('/*') ? 'active' : '' }}" aria-current="page"
+                        href="/">Home</a>
                 </li>
                 <li class="nav-item me-4">
-                    <a class="nav-link" href="#">Staff</a>
+                    <a class="nav-link" href="#">Find Staff</a>
                 </li>
                 <li class="nav-item me-4">
                     <a class="nav-link" href="#">About</a>

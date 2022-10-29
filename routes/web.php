@@ -18,24 +18,43 @@ use Illuminate\Support\Facades\Route;
 
 // Not authenticated user group
 Route::group(['middleware' => 'guest'], function () {
+    // View Route
     Route::get('/', [HomeController::class, 'index'])->name('home');
-
     Route::get('/signin', [AuthController::class, 'index'])->name('Auth');
-    Route::post('/signin', [AuthController::class, 'signin'])->name('signin.proccess');
-
     Route::get('/signup', [AuthController::class, 'signup'])->name('register');
+
+    // Action Route
+    Route::post('/signin', [AuthController::class, 'signin'])->name('signin.proccess');
     Route::post('/signup', [AuthController::class, 'signupProccess'])->name('register.proccess');
 });
 
 // Authenticate user group
 Route::group(['middleware' => 'auth'], function () {
+
+    // Group Staff Route
     Route::prefix('/staff')->group(function () {
+        // View Route
         Route::get('/', [HomeController::class, 'staff'])->name('staff.home');
+
+        // Action Route
     });
 
+    // Group Pemilik Villa Route
     Route::prefix('/villa')->group(function () {
+        // View Route
         Route::get('/', [HomeController::class, 'villa'])->name('villa.home');
+
+        // Action Route
     });
 
+    // Group Admin Route
+    Route::prefix('/admin')->group(function () {
+        // View Route
+        Route::get('/', [HomeController::class, 'admin'])->name('admin.home');
+
+        // Action Route
+    });
+
+    // Action Route
     Route::post('/signout', [AuthController::class, 'signout'])->name('signout');
 });
