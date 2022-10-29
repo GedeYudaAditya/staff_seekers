@@ -14,7 +14,7 @@
                         href="/">Home</a>
                 </li>
                 <li class="nav-item me-4">
-                    <a class="nav-link" href="#">Staff</a>
+                    <a class="nav-link" href="#">Find Job</a>
                 </li>
                 <li class="nav-item me-4">
                     <a class="nav-link" href="#">About</a>
@@ -29,7 +29,8 @@
                     <form action="{{ route('signout') }}" method="POST">
                         <a href="/dashboard" class="btn btn-outline-danger me-2">Manage</a>
                         @csrf
-                        <button type="submit" class="btn btn-danger">Logout</button>
+                        <button type="submit" class="btn btn-danger"><i class="fa-solid fa-arrow-right-from-bracket"></i>
+                            Logout</button>
                     </form>
                 </div>
             @else
