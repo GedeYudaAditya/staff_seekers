@@ -1,6 +1,10 @@
 <section class="row py-5 justify-content-between">
     <div class="col-md-4">
         <img src="{{ asset('/img/logo.png') }}" alt="staff-seekers">
+
+        <br>
+        <span class="welcome text-danger">Welcome to Staff Seekers</span>
+
         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet cum veritatis aliquam modi quidem libero.
             Maiores, quaerat unde saepe harum architecto est! Dicta tempore aut autem perferendis est. Eius, ducimus.
         </p>

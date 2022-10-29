@@ -14,7 +14,7 @@
                         href="/">Home</a>
                 </li>
                 <li class="nav-item me-4">
-                    <a class="nav-link" href="#">Staff</a>
+                    <a class="nav-link" href="#">Find Job</a>
                 </li>
                 <li class="nav-item me-4">
                     <a class="nav-link" href="#">About</a>
