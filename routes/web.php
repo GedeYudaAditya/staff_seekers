@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => 'guest'], function () {
     // View Route
     Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/staff', [HomeController::class, 'index'])->name('guest.home');
     Route::get('/signin', [AuthController::class, 'index'])->name('Auth');
     Route::get('/signup', [AuthController::class, 'signup'])->name('register');
 
@@ -35,7 +36,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::prefix('/staff')->group(function () {
         // View Route
         Route::get('/', [HomeController::class, 'staff'])->name('staff.home');
-
         // Action Route
     });
 
