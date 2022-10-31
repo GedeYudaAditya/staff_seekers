@@ -84,11 +84,18 @@ class AuthController extends Controller
             DB::beginTransaction();
 
             // Create the user with service
+            if ($credentials['role'] == 'villa') {
+                $credentials['status'] = 'inactive';
+            } else {
+                $credentials['status'] = 'active';
+            }
+
             $user = User::create([
                 'name' => $credentials['name'],
                 'username' => $credentials['username'],
                 'email' => $credentials['email'],
                 'role' => $credentials['role'],
+                'status' => $credentials['status'],
                 'password' => Hash::make($credentials['password']),
             ]);
 

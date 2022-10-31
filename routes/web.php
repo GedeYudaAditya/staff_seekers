@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\GuestController;
+use App\Http\Controllers\StaffController;
+use App\Http\Controllers\VillaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,8 +22,7 @@ use Illuminate\Support\Facades\Route;
 // Not authenticated user group
 Route::group(['middleware' => 'guest'], function () {
     // View Route
-    Route::get('/', [HomeController::class, 'index'])->name('home');
-    Route::get('/staff', [HomeController::class, 'index'])->name('guest.home');
+    Route::get('/', [GuestController::class, 'index'])->name('home');
     Route::get('/signin', [AuthController::class, 'index'])->name('Auth');
     Route::get('/signup', [AuthController::class, 'signup'])->name('register');
 
@@ -33,26 +35,30 @@ Route::group(['middleware' => 'guest'], function () {
 Route::group(['middleware' => 'auth'], function () {
 
     // Group Staff Route
-    Route::prefix('/staff')->group(function () {
+    Route::prefix('/staff')->middleware('role:staff')->group(function () {
         // View Route
-        Route::get('/', [HomeController::class, 'staff'])->name('staff.home');
+        Route::get('/', [StaffController::class, 'index'])->name('staff.home');
+
         // Action Route
     });
 
     // Group Pemilik Villa Route
-    Route::prefix('/villa')->group(function () {
+    Route::prefix('/villa')->middleware('role:villa')->group(function () {
         // View Route
-        Route::get('/', [HomeController::class, 'villa'])->name('villa.home');
+        Route::get('/', [VillaController::class, 'index'])->name('villa.home');
 
         // Action Route
     });
 
     // Group Admin Route
-    Route::prefix('/admin')->group(function () {
+    Route::prefix('/admin')->middleware('role:admin')->group(function () {
         // View Route
-        Route::get('/', [HomeController::class, 'admin'])->name('admin.home');
+        Route::get('/', [AdminController::class, 'index'])->name('admin.home');
+        Route::get('/user', [AdminController::class, 'user'])->name('admin.user');
 
         // Action Route
+        Route::post('/user/delete/{users:user}', [AdminController::class, 'destroy'])->name('admin.user.destroy');
+        Route::post('/user/edit/{users:user}', [AdminController::class, 'edit'])->name('admin.user.edit');
     });
 
     // Action Route
