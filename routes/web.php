@@ -38,6 +38,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::prefix('/staff')->middleware('role:staff')->group(function () {
         // View Route
         Route::get('/', [StaffController::class, 'index'])->name('staff.home');
+        Route::get('/find-job', [StaffController::class, 'findJob'])->name('staff.find-job');
 
         // Action Route
     });
