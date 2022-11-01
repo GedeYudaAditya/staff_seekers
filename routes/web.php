@@ -47,6 +47,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::prefix('/villa')->middleware('role:villa')->group(function () {
         // View Route
         Route::get('/', [VillaController::class, 'index'])->name('villa.home');
+        Route::get('/find-staff', [VillaController::class, 'findStaff'])->name('villa.find-staff');
+        Route::get('/about', [VillaController::class, 'about'])->name('villa.about');
 
         // Action Route
     });
