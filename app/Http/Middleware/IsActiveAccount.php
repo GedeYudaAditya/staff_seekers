@@ -17,10 +17,12 @@ class IsActiveAccount
      */
     public function handle(Request $request, Closure $next, String $status)
     {
-        $credentials = $request->only('email', 'password');
+        // $credentials = $request->only('email', 'password');
 
-        if (auth()->user()->status != $status && auth()->user()->role == 'staff' && Auth::attempt($credentials)) {
-            return redirect()->route('staff.inactive');
+
+        if (auth()->user()->status != $status) {
+            // dd(auth()->user()->status != $status);
+            return redirect()->route('inactive');
         }
         return $next($request);
     }

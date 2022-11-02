@@ -46,7 +46,7 @@ class AuthController extends Controller
             }
         }
 
-        return back()->withErrors('loginError', 'Invalid login details');
+        return back()->with('loginError', 'Invalid login details');
     }
 
     public function signout(Request $request)

@@ -1,13 +1,13 @@
-@extends('staff.layouts.app')
+@extends('villa.layouts.app')
 
 @section('content')
-    {{-- Intro Section Start --}}
-    @include('components.introSection')
-    {{-- Intro Section End --}}
+{{-- Intro Section Start --}}
+@include('components.introSection')
+{{-- Intro Section End --}}
 
-    <section>
-        <h1 class="text-center">
-            Villa
-        </h1>
-    </section>
+<section>
+    <h1 class="text-center">
+        Villa
+    </h1>
+</section>
 @endsection

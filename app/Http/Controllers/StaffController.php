@@ -14,11 +14,21 @@ class StaffController extends Controller
             'active' => 'staff.home'
         ]);
     }
+
+
+    public function findJob()
+    {
+        return view('staff.pages.findjob', [
+            'title' => 'Find Job',
+            'active' => 'staff.find-job'
+        ]);
+    }
+
     public function find()
     {
         return view('staff.pages.findjob', [
-            'title' => 'Staff Home',
-            'active' => 'staff.home'
+            'title' => 'Find Job',
+            'active' => 'staff.find-job'
         ]);
     }
     public function desc()
@@ -29,4 +39,5 @@ class StaffController extends Controller
         ]);
     }
     
+
 }

@@ -35,34 +35,43 @@ Route::group(['middleware' => 'guest'], function () {
 Route::group(['middleware' => 'auth'], function () {
 
     // Group Staff Route
-    Route::prefix('/staff')->middleware('role:staff')->group(function () {
+    Route::prefix('/staff')->middleware(['role:staff', 'isActiveAccount:active'])->group(function () {
         // View Route
         Route::get('/', [StaffController::class, 'index'])->name('staff.home');
-        Route::get('/find', [StaffController::class, 'find'])->name('staff.home');
+
+        // Route::get('/find-job', [StaffController::class, 'findJob'])->name('staff.find-job');
+
+        Route::get('/find-job', [StaffController::class, 'find'])->name('staff.find-job');
         Route::get('/desc', [StaffController::class, 'desc'])->name('staff.desc');
+
 
         // Action Route
     });
     
 
     // Group Pemilik Villa Route
-    Route::prefix('/villa')->middleware('role:villa')->group(function () {
+    Route::prefix('/villa')->middleware(['role:villa', 'isActiveAccount:active'])->group(function () {
         // View Route
         Route::get('/', [VillaController::class, 'index'])->name('villa.home');
+        Route::get('/find-staff', [VillaController::class, 'findStaff'])->name('villa.find-staff');
+        Route::get('/about', [VillaController::class, 'about'])->name('villa.about');
 
         // Action Route
     });
 
     // Group Admin Route
-    Route::prefix('/admin')->middleware('role:admin')->group(function () {
+    Route::prefix('/admin')->middleware(['role:admin', 'isActiveAccount:active'])->group(function () {
         // View Route
         Route::get('/', [AdminController::class, 'index'])->name('admin.home');
         Route::get('/user', [AdminController::class, 'user'])->name('admin.user');
 
         // Action Route
-        Route::post('/user/delete/{users:user}', [AdminController::class, 'destroy'])->name('admin.user.destroy');
-        Route::post('/user/edit/{users:user}', [AdminController::class, 'edit'])->name('admin.user.edit');
+        Route::post('/user/delete/{user:username}', [AdminController::class, 'destroy'])->name('admin.user.destroy');
+        Route::post('/user/edit/{user:username}', [AdminController::class, 'edit'])->name('admin.user.edit');
     });
+
+    // Inactive User
+    Route::get('/inactive', [GuestController::class, 'inactive'])->name('inactive')->middleware('isActiveAccount:inactive');
 
     // Action Route
     Route::post('/signout', [AuthController::class, 'signout'])->name('signout');
