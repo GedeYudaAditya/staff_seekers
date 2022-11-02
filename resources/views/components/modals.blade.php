@@ -14,7 +14,7 @@
             <form action="" method="POST" id="form-edit">
                 <div class="modal-body">
                     @csrf
-                    @method('put')
+                    {{-- @method('put') --}}
                     <div class="mb-3">
                         <label for="role" class="form-label">Role</label>
                         <select class="form-select" name="role" id="role">
@@ -50,7 +50,7 @@
         // Button that triggered the modal
         const button = event.relatedTarget
         // Extract info from data-bs-* attributes
-        const recipient = button.getAttribute('update-route')
+        const route = button.getAttribute('update-route')
         const role = button.getAttribute('my-role')
         const status = button.getAttribute('status')
 
@@ -61,14 +61,21 @@
         // Update the modal's content.
         // const modalTitle = exampleModal.querySelector('.modal-title')
         const modalRole = exampleModal.querySelector('.role')
-        const modalStatus = exampleModal.querySelector('.status')
-        const modalBodyInput = exampleModal.querySelector('.modal-body input')
+        const modalStatus = exampleModal.querySelector('#status')
+        const modalBodyInput = exampleModal.querySelector('#form-edit')
 
-        // modalTitle.textContent = `New message to ${recipient}`
-        modalBodyInput.value = recipient
+        // modalTitle.textContent = `New message to ${route}`
+        modalBodyInput.action = route
 
-        console.log(select.children, role);
+        for (let index = 0; index < select.children.length; index++) {
+            select.children[index].selected = select.children[index].value == role
+        }
 
-        select.option.value = role
+        for (let index = 0; index < modalStatus.children.length; index++) {
+            modalStatus.children[index].selected = modalStatus.children[index].value == status
+        }
+        // console.log(select.children[1].selected, role);
+
+        // select.option.value = role
     })
 </script>
