@@ -22,7 +22,8 @@ class DatabaseSeeder extends Seeder
             'username' => 'admin',
             'role' => 'admin',
             'status' => 'active',
-            'password' => bcrypt('admin')
+            'password' => bcrypt('admin'),
+            'phone' => '081234567890',
         ]);
 
         \App\Models\User::factory()->create([
@@ -35,7 +36,9 @@ class DatabaseSeeder extends Seeder
             'bio' => 'I am a staff',
             'detailBio' => 'detail bio staff',
             'salary' => '1000000 - 2000000',
-            'image' => 'https://picsum.photos/200/300'
+            'image' => 'https://picsum.photos/200/300',
+            'address' => 'Jl. Kebon Jeruk No. 1, Jakarta Barat',
+            'phone' => '081234567890'
         ]);
 
         \App\Models\User::factory()->create([
@@ -48,7 +51,9 @@ class DatabaseSeeder extends Seeder
             'bio' => 'I am a villa',
             'detailBio' => 'detail bio villa',
             'salary' => '1000000 - 2000000',
-            'image' => 'https://picsum.photos/200/300'
+            'image' => 'https://picsum.photos/200/300',
+            'address' => 'Jl. Kebon Jeruk No. 1, Jakarta Barat',
+            'phone' => '081234567890'
         ]);
     }
 }

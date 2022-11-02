@@ -14,7 +14,7 @@
                         href="{{ route('villa.home') }}">Home</a>
                 </li>
                 <li class="nav-item me-4">
-                    <a class="nav-link {{ Request::is('villa/find-staff') ? 'active' : '' }}"
+                    <a class="nav-link {{ Request::is('villa/find-staff*') ? 'active' : '' }}"
                         href="{{ route('villa.find-staff') }}">Find
                         Staff</a>
                 </li>
