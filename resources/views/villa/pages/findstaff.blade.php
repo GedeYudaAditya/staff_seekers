@@ -17,23 +17,27 @@
         <div class="row row-cols-1 row-cols-md-3 g-4 mb-5 mx-0">
             @foreach ($staffs as $staff)
                 <div class="col">
-                    <div class="card h-100">
-                        @if ($staff['image'] != null)
-                            <img style="height: 200px" src="{{ $staff['image'] }}" class="card-img-top img-fluid"
-                                alt="{{ $staff->image }}">
-                        @else
-                            <img style="height: 200px" src="https://reqres.in/img/faces/7-image.jpg"
-                                class="card-img-top img-fluid" alt="user-example">
-                        @endif
-                        <div class="card-body">
+                    <a href="{{ route('villa.find-staff.detail', $staff->username) }}"
+                        class="text-decoration-none text-dark">
+                        <div class="card h-100 shadow">
+                            @if ($staff['image'] != null)
+                                <img style="height: 200px" src="{{ $staff['image'] }}" class="card-img-top img-fluid"
+                                    alt="{{ $staff->image }}">
+                            @else
+                                <img style="height: 200px" src="https://reqres.in/img/faces/7-image.jpg"
+                                    class="card-img-top img-fluid" alt="user-example">
+                            @endif
                             <div class="card-body">
                                 <h5 class="card-title" style="text-decoration: none;">Nama: {{ $staff->name }}</h5>
                                 <p class="card-text"><b>Bio: </b> <br>
                                     {{ $staff->bio }}
                                 </p>
                             </div>
+                            <div class="card-footer">
+                                <small class="text-muted"><b>Alamat: </b>{{ $staff->address }}</small>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             @endforeach
         </div>
