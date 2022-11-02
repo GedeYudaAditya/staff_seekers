@@ -17,13 +17,16 @@ class CheckRole
     public function handle(Request $request, Closure $next, String $route)
     {
         if ($route == 'admin' && auth()->user()->role != 'admin') {
-            abort('403');
+            return redirect('/' . auth()->user()->role);
+            // abort('403');
         }
         if ($route == 'staff' && auth()->user()->role != 'staff') {
-            abort('403');
+            return redirect('/' . auth()->user()->role);
+            // abort('403');
         }
         if ($route == 'villa' && auth()->user()->role != 'villa') {
-            abort('403');
+            return redirect('/' . auth()->user()->role);
+            // abort('403');
         }
 
         return $next($request);
