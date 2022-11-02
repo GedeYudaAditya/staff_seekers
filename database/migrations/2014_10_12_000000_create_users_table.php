@@ -20,6 +20,9 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->enum('role', ['admin', 'staff', 'villa']);
             $table->enum('status', ['active', 'inactive']);
+            $table->string('bio')->nullable();
+            $table->longText('detailBio')->nullable();
+            $table->string('salary')->nullable();
             $table->string('image')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
