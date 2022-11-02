@@ -14,4 +14,21 @@ class VillaController extends Controller
             'active' => 'villa'
         ]);
     }
+
+    public function findStaff()
+    {
+        return view('villa.pages.findstaff', [
+            'title' => 'Find Staff',
+            'active' => 'villa.find-staff'
+        ]);
+    }
+
+    public function about()
+    {
+        return view('villa.pages.about', [
+            'title' => 'About',
+            'active' => 'villa.about'
+        ]);
+    }
+    
 }
