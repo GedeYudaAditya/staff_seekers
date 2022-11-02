@@ -13,9 +13,7 @@
                     <a class="nav-link {{ Request::is('/*') ? 'active' : '' }}" aria-current="page"
                         href="/">Home</a>
                 </li>
-                {{-- <li class="nav-item me-4">
-                    <a class="nav-link" href="/staff">Staff</a>
-                </li> --}}
+
                 <li class="nav-item me-4">
                     <a class="nav-link" href="#">About</a>
                 </li>
