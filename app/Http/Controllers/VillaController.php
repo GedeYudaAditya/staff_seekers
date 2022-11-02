@@ -26,6 +26,15 @@ class VillaController extends Controller
         ]);
     }
 
+    public function detailStaff(User $user)
+    {
+        return view('villa.pages.detailstaff', [
+            'title' => 'Detail Staff',
+            'active' => 'villa.find-staff',
+            'staff' => $user
+        ]);
+    }
+
     public function about()
     {
         return view('villa.pages.about', [
