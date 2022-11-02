@@ -42,4 +42,15 @@ class VillaController extends Controller
             'active' => 'villa.about'
         ]);
     }
+
+    public function staffDesc(User $user)
+    {
+        // $staff = User::where('id', $user->id)->get();
+        // @dd($user);
+        return view('villa.pages.staff_desc', [
+            'title' => 'Staff Desc',
+            'active' => 'villa.find-staff',
+            // 'staff' => $staff
+        ]);
+    }
 }
