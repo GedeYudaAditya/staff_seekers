@@ -14,4 +14,12 @@ class GuestController extends Controller
             'active' => 'home'
         ]);
     }
+
+    public function inactive()
+    {
+        return view('guest.pages.inactive', [
+            'title' => 'Home',
+            'active' => 'inactive'
+        ]);
+    }
 }

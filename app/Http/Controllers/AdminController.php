@@ -28,16 +28,26 @@ class AdminController extends Controller
 
     public function destroy(User $user)
     {
-        User::where('id', $user)->delete();
+        // dd($username);
+        // User::destroy($username->id);
+        User::where('id', $user->id)->delete();
         return back()->with('success', 'Delete data user success');
     }
 
-    public function edit(Request $request, User $user)
+    public function edit(User $user, Request $request)
     {
         $validationData = $request->validate([
-            'status' => 'required'
+            'status' => 'required',
+            'role' => 'required'
         ]);
 
-        User::where('id', $user)->update($validationData);
+        try {
+            User::where('id', $user->id)->update($validationData);
+
+            return back()->with('success', 'Update data user success');
+        } catch (\Exception $e) {
+            dd($e);
+            // return back()->with('error', 'Update data user failed | ' . $e->getMessage());
+        }
     }
 }
