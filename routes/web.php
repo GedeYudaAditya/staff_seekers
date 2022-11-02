@@ -56,6 +56,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/find-staff', [VillaController::class, 'findStaff'])->name('villa.find-staff');
         Route::get('/find-staff/{user:username}', [VillaController::class, 'detailStaff'])->name('villa.find-staff.detail');
         Route::get('/about', [VillaController::class, 'about'])->name('villa.about');
+        // harusnya get staff by id/username
+        Route::get('/find-staff/staff-desc/', [VillaController::class, 'staffDesc'])->name('villa.staff-desc');
 
         // Action Route
     });
