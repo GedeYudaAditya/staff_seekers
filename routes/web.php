@@ -38,10 +38,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::prefix('/staff')->middleware(['role:staff', 'isActiveAccount:active'])->group(function () {
         // View Route
         Route::get('/', [StaffController::class, 'index'])->name('staff.home');
-        Route::get('/find-job', [StaffController::class, 'findJob'])->name('staff.find-job');
+
+        // Route::get('/find-job', [StaffController::class, 'findJob'])->name('staff.find-job');
+
+        Route::get('/find-job', [StaffController::class, 'find'])->name('staff.find-job');
+        Route::get('/desc', [StaffController::class, 'desc'])->name('staff.desc');
+
 
         // Action Route
     });
+    
 
     // Group Pemilik Villa Route
     Route::prefix('/villa')->middleware(['role:villa', 'isActiveAccount:active'])->group(function () {
@@ -70,3 +76,4 @@ Route::group(['middleware' => 'auth'], function () {
     // Action Route
     Route::post('/signout', [AuthController::class, 'signout'])->name('signout');
 });
+
