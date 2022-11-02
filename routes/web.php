@@ -47,7 +47,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         // Action Route
     });
-    
+
 
     // Group Pemilik Villa Route
     Route::prefix('/villa')->middleware(['role:villa', 'isActiveAccount:active'])->group(function () {
@@ -55,6 +55,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/', [VillaController::class, 'index'])->name('villa.home');
         Route::get('/find-staff', [VillaController::class, 'findStaff'])->name('villa.find-staff');
         Route::get('/about', [VillaController::class, 'about'])->name('villa.about');
+        // harusnya get staff by id/username
+        Route::get('/find-staff/staff-desc/', [VillaController::class, 'staffDesc'])->name('villa.staff-desc');
 
         // Action Route
     });
@@ -76,4 +78,3 @@ Route::group(['middleware' => 'auth'], function () {
     // Action Route
     Route::post('/signout', [AuthController::class, 'signout'])->name('signout');
 });
-
