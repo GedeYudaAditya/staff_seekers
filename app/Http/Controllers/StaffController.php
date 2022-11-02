@@ -14,4 +14,19 @@ class StaffController extends Controller
             'active' => 'staff.home'
         ]);
     }
+    public function find()
+    {
+        return view('staff.pages.findjob', [
+            'title' => 'Staff Home',
+            'active' => 'staff.home'
+        ]);
+    }
+    public function desc()
+    {
+        return view('staff.pages.description', [
+            'title' => 'Staff Home',
+            'active' => 'staff.home'
+        ]);
+    }
+    
 }

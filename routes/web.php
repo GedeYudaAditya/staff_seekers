@@ -38,9 +38,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::prefix('/staff')->middleware('role:staff')->group(function () {
         // View Route
         Route::get('/', [StaffController::class, 'index'])->name('staff.home');
+        Route::get('/find', [StaffController::class, 'find'])->name('staff.home');
+        Route::get('/desc', [StaffController::class, 'desc'])->name('staff.desc');
 
         // Action Route
     });
+    
 
     // Group Pemilik Villa Route
     Route::prefix('/villa')->middleware('role:villa')->group(function () {
@@ -64,3 +67,4 @@ Route::group(['middleware' => 'auth'], function () {
     // Action Route
     Route::post('/signout', [AuthController::class, 'signout'])->name('signout');
 });
+
