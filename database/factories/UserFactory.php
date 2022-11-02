@@ -22,6 +22,9 @@ class UserFactory extends Factory
             'username' => fake()->userName(),
             'role' => fake()->randomElement(['admin', 'staff', 'villa']),
             'status' => fake()->randomElement(['active', 'inactive']),
+            'bio' => fake()->sentence(),
+            'detailBio' => fake()->paragraph(),
+            'image' => fake()->imageUrl(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
