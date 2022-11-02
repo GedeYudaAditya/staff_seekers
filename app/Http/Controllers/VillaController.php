@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class VillaController extends Controller
@@ -17,9 +18,11 @@ class VillaController extends Controller
 
     public function findStaff()
     {
+        $staffs = User::where('role', 'staff')->get();
         return view('villa.pages.findstaff', [
             'title' => 'Find Staff',
-            'active' => 'villa.find-staff'
+            'active' => 'villa.find-staff',
+            'staffs' => $staffs
         ]);
     }
 
@@ -30,5 +33,4 @@ class VillaController extends Controller
             'active' => 'villa.about'
         ]);
     }
-    
 }
