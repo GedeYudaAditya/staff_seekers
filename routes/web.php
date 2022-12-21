@@ -42,12 +42,7 @@ Route::group(['middleware' => 'auth'], function () {
         // Route::get('/find-job', [StaffController::class, 'findJob'])->name('staff.find-job');
 
         Route::get('/find-job', [StaffController::class, 'find'])->name('staff.find-job');
-<<<<<<< HEAD
         Route::get('/desc/{user:username}', [StaffController::class, 'desc'])->name('staff.desc');
-=======
-        Route::get('/desc', [StaffController::class, 'desc'])->name('staff.desc');
->>>>>>> 8838e0464e97d542cd58e33fcb0b55b9d6bf08e2
-
 
         // Action Route
     });
