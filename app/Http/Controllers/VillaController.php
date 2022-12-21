@@ -42,4 +42,36 @@ class VillaController extends Controller
             'active' => 'villa.about'
         ]);
     }
+
+    public function dashboard()
+    {
+        return view('villa.pages.dashboard', [
+            'title' => 'Dashboard',
+            'active' => 'villa.dashboard'
+        ]);
+    }
+
+    public function profile()
+    {
+        return view('villa.pages.profile', [
+            'title' => 'Profile',
+            'active' => 'villa.profile'
+        ]);
+    }
+
+    public function lowongan()
+    {
+        return view('villa.pages.lowongan', [
+            'title' => 'Lowongan',
+            'active' => 'villa.lowongan'
+        ]);
+    }
+
+    public function pendaftar()
+    {
+        return view('villa.pages.pendaftar', [
+            'title' => 'Lowongan',
+            'active' => 'villa.lowongan'
+        ]);
+    }
 }
