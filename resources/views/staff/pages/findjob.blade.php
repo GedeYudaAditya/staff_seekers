@@ -11,7 +11,7 @@
                     <div class="card" style="width: 18rem;">
                         <img src="../img/villa1.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <a href="pages/description.blade.php" class="link-dark nounderline">
+                            <a href="{{ route('staff.desc', $villa->username) }}" class="link-dark nounderline">
                                 <h5 class="card-title">{{ $villa->name }}</h5>
                             </a>
                             <p class="card-text">

@@ -42,6 +42,9 @@ Route::group(['middleware' => 'auth'], function () {
         // Route::get('/find-job', [StaffController::class, 'findJob'])->name('staff.find-job');
 
         Route::get('/find-job', [StaffController::class, 'find'])->name('staff.find-job');
+        Route::get('/manage', [StaffController::class, 'manage'])->name('staff.manage');
+        Route::post('/updateProfile', [StaffController::class, 'updateProfile'])->name('staff.updateProfil');
+
         Route::get('/desc/{user:username}', [StaffController::class, 'desc'])->name('staff.desc');
 
 
