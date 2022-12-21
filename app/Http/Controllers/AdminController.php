@@ -10,9 +10,13 @@ class AdminController extends Controller
     //
     public function index()
     {
+        $user = User::where('role','staff')->count();
+         $villa = User::where('role','villa')->count();
         return view('admin.pages.index', [
             'title' => 'Admin',
-            'active' => 'admin'
+            'active' => 'admin',
+            'user' => $user,
+            'villa' => $villa
         ]);
     }
 
