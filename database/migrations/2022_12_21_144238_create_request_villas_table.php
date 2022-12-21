@@ -11,18 +11,13 @@ return new class extends Migration
      *
      * @return void
      */
-
-    // Title, slug, thumbnail
-    
     public function up()
     {
-        Schema::create('announcements', function (Blueprint $table) {
+        Schema::create('request_villas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->string('title');
-            $table->string('hiring');
-            $table->string('slug');
-            $table->string('thumbnail')->nullable();
+            $table->foreignId('staff_id')->constrained('users')->onDelete('cascade');
+            $table->enum('status', ['pending', 'accepted', 'rejected']);
             $table->timestamps();
         });
     }
@@ -34,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('announcements');
+        Schema::dropIfExists('request_villas');
     }
 };

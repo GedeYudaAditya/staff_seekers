@@ -33,4 +33,27 @@ class StaffController extends Controller
             'villa' => $user
         ]);
     }
+
+    public function manage()
+    {
+        return view('staff.pages.manage', [
+            'title' => 'Manage',
+            'active' => 'staff.manage'
+        ]);
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $validationData = $request->validate([
+            'name' => 'required',
+            'username' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'salary' => 'required',
+            'bio' => 'required',
+            'detailBio' => 'required',
+            'address' => 'required',
+            'cv' => 'required'
+        ]);
+    }
 }
