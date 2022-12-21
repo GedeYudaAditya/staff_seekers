@@ -34,8 +34,8 @@
                         <p class="card-text"><b>Bio: </b> <br>
                             {{ $staff->bio }}
                         </p>
-                        <a href="{{ route('villa.find-staff.detail', $staff->username') }}"
-                            class="btn btn-danger ">Details</a>
+                        <a href="{{ route('villa.find-staff.detail', $staff->username)}}"
+                            class="btn btn-danger">Details</a>
                     </div>
                     @endforeach
                 </div>

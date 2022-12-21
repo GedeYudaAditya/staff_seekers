@@ -2,7 +2,7 @@
 
 @section('content')
 {{-- Intro Section Start --}}
-<div class="row justify-content-center mt-5">
+<div class="row justify-content-center mt-5 py-5">
     <div class="col-lg-4 px-3">
         <div class="text-center">
             <img src="{{ asset('/img/logo.png') }}" alt="staff-seekers">
