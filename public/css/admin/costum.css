@@ -1,0 +1,24 @@
+.action {
+    width: 80px;
+}
+
+.mt-5rem {
+    margin-top: 5rem;
+    margin-bottom: 2rem;
+}
+
+.bg-1 {
+    background-color: #ecc058;
+}
+
+.bg-2 {
+    background-color: #c59a66;
+}
+
+.bg-3 {
+    background-color: #ff7272;
+}
+
+.bg-red {
+    background-color: #d2322c !important;
+}

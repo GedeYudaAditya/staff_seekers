@@ -1,0 +1,8 @@
+* {
+    box-sizing: border-box;
+}
+
+.welcome {
+    font-size: large;
+    font-weight: bold;
+}
