@@ -4,7 +4,7 @@
     {{-- loginform --}}
     <div class="row justify-content-center">
 
-        <div class="col-lg-4 px-3">
+        <div class="col-lg-4 px-3 mt-5 pt-5">
             {{-- alert login --}}
             @if (session()->has('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -18,7 +18,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
-            <main class="form-signin mt-4 py-3">
+            <main class="form-signin mt-1 py-3">
                 <div class="container border border-danger rounded">
                     <div class="text-center">
                         <img src="{{ asset('/img/logo.png') }}" alt="logo">

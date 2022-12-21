@@ -2,15 +2,18 @@
 
 @section('content')
 {{-- Intro Section Start --}}
-<div class="row justify-content-center mt-5">
-    <div class="col-lg-4 px-3">
-        <div class="text-center">
-            <h5 class="card-title">Special title treatment</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" class="btn btn-danger">Go somewhere</a>
-        </div>
+
+<div class="position-relative overflow-hidden p-3 p-md-5 text-center">
+    <div class="col-md-5 p-lg-5 mx-auto my-5">
+        <h1 class="display-4 fw-normal">Punny headline</h1>
+        <p class="lead fw-normal">And an even wittier subheading to boot. Jumpstart your marketing efforts with this
+            example based on Apple’s marketing pages.</p>
+        <a class="btn btn-outline-secondary" href="#list">Coming soon</a>
     </div>
+    <div class="product-device shadow-sm d-none d-md-block"></div>
+    <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
 </div>
+
 
 <div class="row mt-4">
     {{-- TINGGAL AKTIFIN AJA KALO MAU DIPAKEK --}}
@@ -31,13 +34,11 @@
                         <p class="card-text"><b>Bio: </b> <br>
                             {{ $staff->bio }}
                         </p>
-                        <a href="{{ route('villa.find-staff.detail', $staff->username) }}"
+                        <a href="{{ route('villa.find-staff.detail', $staff->username') }}"
                             class="btn btn-danger ">Details</a>
                     </div>
+                    @endforeach
                 </div>
             </div>
         </div>
-        @endforeach
-    </div>
-</div>
-@endsection
+        @endsection
