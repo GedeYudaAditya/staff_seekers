@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+<<<<<<< HEAD
+use App\Models\User;
+=======
+>>>>>>> 8838e0464e97d542cd58e33fcb0b55b9d6bf08e2
 use Illuminate\Http\Request;
 
 class StaffController extends Controller
@@ -15,6 +19,25 @@ class StaffController extends Controller
         ]);
     }
 
+<<<<<<< HEAD
+    public function find()
+    {
+        $villas = User::where('role', 'villa')->get();
+        return view('staff.pages.findjob', [
+            'title' => 'Find Job',
+            'active' => 'staff.find-job',
+            'villas' => $villas
+        ]);
+    }
+    public function desc(User $user)
+    {
+        return view('staff.pages.description', [
+            'title' => 'Detail Villa',
+            'active' => 'staff.find-job',
+            'villa' => $user
+        ]);
+    }
+=======
 
     public function findJob()
     {
@@ -40,4 +63,5 @@ class StaffController extends Controller
     }
     
 
+>>>>>>> 8838e0464e97d542cd58e33fcb0b55b9d6bf08e2
 }

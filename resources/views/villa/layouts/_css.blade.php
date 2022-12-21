@@ -7,6 +7,8 @@
 
 {{-- Costum Css --}}
 <link rel="stylesheet" href="{{ asset('/css/guest/costum.css') }}">
+<link rel="stylesheet" href="{{ asset('/css/villa/product.css') }}">
+<link rel="stylesheet" href="{{ asset('/css/villa/carousel.css') }}">
 
 {{-- Font Awesome --}}
 <script src="https://kit.fontawesome.com/90717bbea0.js" crossorigin="anonymous"></script>
