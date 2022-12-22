@@ -4,13 +4,14 @@
     <div class="container">
         <div class="description w-100 text-center">
             <div class="header mt-5">
-                <h5>The Ubud Villa</h5>
+                <h5>{{ $villa->villa_name }}</h5>
                 <div class="info mt-2 ">
-                    <div>jalan raya ubud no. 178B, ubud, Bali</div>
-                    <div class="mt-0">email: ubud.villa@gmail.com</div>
+                    <div>{{ $villa->address }}</div>
+                    <div class="mt-0">email: {{ $villa->email }}</div>
                 </div>
                 <div class="card w-100">
-                    <img src="{{ asset('/img/villa1.jpg') }}" class="h-75" alt="">
+                    <img src="{{ $villa->image_villa ? asset('/storage/villa/' . $villa->image_villa) : asset('/img/villa1.jpg') }}"
+                        class="h-75" alt="">
                 </div>
 
             </div>
@@ -20,17 +21,15 @@
                     <h6>About Us</h6>
                 </div>
                 <div class="desc">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Ipsa impedit id doloribus ab laboriosam praesentium reiciendis ad possimus eligendi, nemo, quis
-                        dolore
-                        dicta, aspernatur odit.
+                    <p>
+                        {{ $villa->detailBio }}
                     </p>
                 </div>
                 <div>
                     <h6 class="text-center">Salary</h6>
                 </div>
                 <div class="text-center">
-                    <p>Rp.2.500.000 - Rp. 15.000.000</p>
+                    <p>{{ $villa->salary }}</p>
                 </div>
                 <div class="col-lg-3 py-2 text-center w-100">
                     <h6>Hire</h6>
@@ -55,9 +54,30 @@
                     </div>
                 </div>
                 <div class="button d-grid py-5">
-                    <input class="btn btn-danger" type="button" value="Apply">
+                    <form action="{{ route('staff.requestJob', $villa->username) }}" method="post">
+                        {{-- notif --}}
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+                        @if (session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+                        @csrf
+                        @if ($userRequest == 'null')
+                            <button type="submit" class="btn btn-danger">Request Job</button>
+                        @else
+                            @if ($userRequest == 'rejected')
+                                <button type="submit" class="btn btn-danger">Request Job</button>
+                            @else
+                                <button type="submit" class="btn btn-danger" disabled>Request Job</button>
+                            @endif
+                        @endif
+                    </form>
                 </div>
-
             </div>
         </div>
     </div>

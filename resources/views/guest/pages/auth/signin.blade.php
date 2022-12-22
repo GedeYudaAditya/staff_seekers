@@ -50,7 +50,7 @@
                         </div>
                         <div class="row g-2 mb-4">
                             <div class="col-sm-7">
-                                <small class="d-block text-start">Belum punya akun? <a href="#"
+                                <small class="d-block text-start">Belum punya akun? <a href="{{ route('register') }}"
                                         class="text-decoration-none text-danger">Sign Up</a>
                                 </small>
                             </div>

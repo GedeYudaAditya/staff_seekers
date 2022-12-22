@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Announcement>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Requirement>
  */
-class AnnouncementFactory extends Factory
+class RequirementFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,11 +17,8 @@ class AnnouncementFactory extends Factory
     public function definition()
     {
         return [
+            'name' => fake()->sentence(3),
             'user_id' => fake()->numberBetween(1, 100),
-            'title' => fake()->sentence(3),
-            'hiring' => fake()->boolean,
-            'slug' => fake()->slug,
-            'thumbnail' => fake()->imageUrl(640, 480, 'people'),
         ];
     }
 }

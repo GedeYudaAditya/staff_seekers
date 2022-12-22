@@ -39,4 +39,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function requestVilla()
+    {
+        return $this->hasMany(RequestVilla::class, 'user_id', 'id');
+    }
+
+    public function requestStaff()
+    {
+        return $this->hasMany(RequestStaff::class, 'user_id', 'id');
+    }
+
+    public function announcement()
+    {
+        return $this->hasMany(Announcement::class, 'user_id', 'id');
+    }
+
+    public function requirement()
+    {
+        return $this->hasMany(Requirement::class, 'user_id', 'id');
+    }
 }

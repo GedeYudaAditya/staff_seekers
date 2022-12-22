@@ -5,16 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Announcement extends Model
+class Requirement extends Model
 {
     use HasFactory;
 
     protected $fillable = [
+        'name',
         'user_id',
-        'title',
-        'hiring',
-        'slug',
-        'thumbnail'
     ];
 
     public function user()

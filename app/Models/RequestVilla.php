@@ -8,4 +8,20 @@ use Illuminate\Database\Eloquent\Model;
 class RequestVilla extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'user_id',
+        'staff_id',
+        'status'
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function staff()
+    {
+        return $this->belongsTo(User::class, 'staff_id', 'id');
+    }
 }

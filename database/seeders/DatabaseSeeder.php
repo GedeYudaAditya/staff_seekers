@@ -3,6 +3,10 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\RequestStaff;
+use App\Models\RequestVilla;
+use App\Models\Requirement;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,7 +18,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::factory(10)->create();
+        \App\Models\User::factory(100)->create();
 
         \App\Models\User::factory()->create([
             'name' => 'Admin',
@@ -22,6 +26,7 @@ class DatabaseSeeder extends Seeder
             'username' => 'admin',
             'role' => 'admin',
             'status' => 'active',
+            'image' => 'https://picsum.photos/200/300',
             'password' => bcrypt('admin'),
             'phone' => '081234567890',
         ]);
@@ -30,6 +35,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Staff',
             'email' => 'staff@gmail.com',
             'username' => 'staff',
+            'age' => '20',
             'role' => 'staff',
             'status' => 'active',
             'password' => bcrypt('staff'),
@@ -42,8 +48,10 @@ class DatabaseSeeder extends Seeder
         ]);
 
         \App\Models\User::factory()->create([
-            'name' => 'Villa',
+            'name' => 'Person Villa',
+            'villa_name' => 'Villa 1',
             'email' => 'villa@gmail.com',
+            'age' => '20',
             'username' => 'villa',
             'role' => 'villa',
             'status' => 'active',
@@ -55,5 +63,10 @@ class DatabaseSeeder extends Seeder
             'address' => 'Jl. Kebon Jeruk No. 1, Jakarta Barat',
             'phone' => '081234567890'
         ]);
+
+        Requirement::factory(100)->create();
+
+        RequestStaff::factory(100)->create();
+        RequestVilla::factory(100)->create();
     }
 }
