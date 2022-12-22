@@ -12,7 +12,10 @@
 <body>
     @include('villa.layouts._nav')
 
-    <div class="container-fluid p-0">
+    {{-- <div class="container-fluid p-0">
+        @yield('content')
+    </div> --}}
+    <div class="height-100 mt-5rem">
         @yield('content')
     </div>
 

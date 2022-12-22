@@ -63,6 +63,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/find-staff', [VillaController::class, 'findStaff'])->name('villa.find-staff');
         Route::get('/find-staff/{user:username}', [VillaController::class, 'detailStaff'])->name('villa.find-staff.detail');
         Route::get('/about', [VillaController::class, 'about'])->name('villa.about');
+        Route::get('/dashboard', [VillaController::class, 'dashboard'])->name('villa.dashboard');
+        Route::get('/dashboard/profile', [VillaController::class, 'profile'])->name('villa.profile');
+        Route::get('/dashboard/lowongan', [VillaController::class, 'lowongan'])->name('villa.lowongan');
+        Route::get('/dashboard/pendaftar', [VillaController::class, 'pendaftar'])->name('villa.pendaftar');
         // Action Route
     });
 

@@ -24,7 +24,7 @@
                 <div class="card border-0 shadow">
                     <div class="card-body text-success">
                         <h5 class="card-title"> <i class="fa-solid fa-user-check"></i> Jumlah User</h5>
-                        <p class="card-text">100</p>
+                        <p class="card-text">{{$user}}</p>
 
                         <a href="#" class="text-decoration-none">
                             Lihat Detail >></a>
@@ -39,7 +39,7 @@
                 <div class="card border-0 shadow">
                     <div class="card-body text-warning">
                         <h5 class="card-title"> <i class="fa-solid fa-building-user"></i> Jumlah User Villa</h5>
-                        <p class="card-text">100</p>
+                        <p class="card-text">{{$villa}}</p>
 
                         <a href="#" class="text-decoration-none">
                             Lihat Detail >></a>
