@@ -41,13 +41,17 @@ Route::group(['middleware' => 'auth'], function () {
 
         // Route::get('/find-job', [StaffController::class, 'findJob'])->name('staff.find-job');
 
-        Route::get('/find-job', [StaffController::class, 'find'])->name('staff.find-job');
+        Route::get('/find-job', [StaffController::class, 'searchJob'])->name('staff.find-job');
+        // Route::get('/find-job/search', [StaffController::class, 'searchJob'])->name('staff.searchjob');
         Route::get('/manage', [StaffController::class, 'manage'])->name('staff.manage');
+        Route::get('manage/listRequestedJob', [StaffController::class, 'requestedJobList'])->name('staff.listRequestedJob');
+        Route::get('manage/listReceivedJob', [StaffController::class, 'receivedJobList'])->name('staff.listReceivedJob');
+
         Route::post('/updateProfile', [StaffController::class, 'updateProfile'])->name('staff.updateProfil');
 
         Route::get('/desc/{user:username}', [StaffController::class, 'desc'])->name('staff.desc');
 
-
+        Route::post('/request/{user:username}', [StaffController::class, 'requestJob'])->name('staff.requestJob');
         // Action Route
     });
 

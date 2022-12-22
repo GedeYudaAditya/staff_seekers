@@ -19,12 +19,15 @@ class UserFactory extends Factory
     {
         return [
             'name' => fake()->name(),
+            'villa_name' => fake()->company(),
+            'age' => fake()->numberBetween(18, 60),
             'username' => fake()->userName(),
             'role' => fake()->randomElement(['admin', 'staff', 'villa']),
             'status' => fake()->randomElement(['active', 'inactive']),
             'bio' => fake()->sentence(),
             'detailBio' => fake()->paragraph(),
             'image' => fake()->imageUrl(),
+            'villa_image' => fake()->imageUrl(),
             'salary' => fake()->randomNumber(6),
             'address' => fake()->address(),
             'phone' => fake()->phoneNumber(),

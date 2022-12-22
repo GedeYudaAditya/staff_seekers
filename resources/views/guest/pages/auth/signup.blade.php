@@ -85,7 +85,7 @@
                         </div>
                         <div class="row g-2 mb-4">
                             <div class="col-sm-7">
-                                <small class="d-block text-start">Sudah punya akun? <a href="#"
+                                <small class="d-block text-start">Sudah punya akun? <a href="{{ route('Auth') }}"
                                         class="text-decoration-none text-danger">Sign In</a>
                                 </small>
                             </div>

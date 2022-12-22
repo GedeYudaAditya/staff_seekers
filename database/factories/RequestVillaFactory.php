@@ -17,7 +17,9 @@ class RequestVillaFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'user_id' => fake()->numberBetween(90, 103),
+            'staff_id' => fake()->numberBetween(90, 103),
+            'status' => fake()->randomElement(['pending', 'accepted', 'rejected']),
         ];
     }
 }
