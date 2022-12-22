@@ -17,7 +17,7 @@ class AnnouncementFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => fake()->numberBetween(1, 100),
+            'user_id' => fake()->numberBetween(90, 103),
             'title' => fake()->sentence(3),
             'hiring' => fake()->boolean,
             'slug' => fake()->slug,
