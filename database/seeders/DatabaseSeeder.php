@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Announcement;
 use App\Models\RequestStaff;
 use App\Models\RequestVilla;
 use App\Models\Requirement;
@@ -68,5 +69,7 @@ class DatabaseSeeder extends Seeder
 
         RequestStaff::factory(100)->create();
         RequestVilla::factory(100)->create();
+
+        Announcement::factory(100)->create();
     }
 }

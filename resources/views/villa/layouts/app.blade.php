@@ -15,7 +15,7 @@
     {{-- <div class="container-fluid p-0">
         @yield('content')
     </div> --}}
-    <div class="height-100 mt-5rem">
+    <div class="container-fluid p-0">
         @yield('content')
     </div>
 

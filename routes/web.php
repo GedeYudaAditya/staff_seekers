@@ -47,12 +47,12 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('manage/listRequestedJob', [StaffController::class, 'requestedJobList'])->name('staff.listRequestedJob');
         Route::get('manage/listReceivedJob', [StaffController::class, 'receivedJobList'])->name('staff.listReceivedJob');
 
-        Route::post('/updateProfile', [StaffController::class, 'updateProfile'])->name('staff.updateProfil');
-
         Route::get('/desc/{user:username}', [StaffController::class, 'desc'])->name('staff.desc');
 
-        Route::post('/request/{user:username}', [StaffController::class, 'requestJob'])->name('staff.requestJob');
+
         // Action Route
+        Route::post('/request/{user:username}', [StaffController::class, 'requestJob'])->name('staff.requestJob');
+        Route::post('/updateProfile', [StaffController::class, 'updateProfile'])->name('staff.updateProfil');
     });
 
 
@@ -67,7 +67,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/dashboard/profile', [VillaController::class, 'profile'])->name('villa.profile');
         Route::get('/dashboard/lowongan', [VillaController::class, 'lowongan'])->name('villa.lowongan');
         Route::get('/dashboard/pendaftar', [VillaController::class, 'pendaftar'])->name('villa.pendaftar');
+
         // Action Route
+        // Route::post('/dashboard/pendaftar/request/{user:username}', [VillaController::class, 'requestStaff'])->name('villa.requestStaff');
+        Route::post('/dashboard/updateProfile', [VillaController::class, 'updateProfile'])->name('villa.updateProfil');
+        Route::post('/dashboard/lowongan/create', [VillaController::class, 'tambahLowongan'])->name('villa.createLowongan');
     });
 
     // Group Admin Route
