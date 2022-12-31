@@ -86,7 +86,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     {{-- {{ route('villa.desc', $staff->username) }} --}}
-                                    <a href="" class="btn btn-sm btn-primary">Apply</a>
+                                    <a href="{{ route('villa.find-staff.detail', $staff->username) }}" class="btn btn-sm btn-primary">Apply</a>
                                 </div>
                             </div>
                         </div>

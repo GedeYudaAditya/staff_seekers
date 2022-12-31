@@ -62,10 +62,15 @@ class VillaController extends Controller
 
     public function detailStaff(User $user)
     {
+        $staffRequest = RequestVilla::where('user_id', auth()->user()->id)->where('staff_id', $user->id)->first();
+
+        $staffRequest = $staffRequest ? $staffRequest->status : 'null';
+
         return view('villa.pages.staff_desc', [
             'title' => 'Detail Staff',
             'active' => 'villa.find-staff',
-            'staff' => $user
+            'staff' => $user,
+            'staffRequest' => $staffRequest
         ]);
     }
 
