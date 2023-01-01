@@ -10,7 +10,7 @@
                     <div class="mt-0">email: {{ $villa->email }}</div>
                 </div>
                 <div class="card w-100">
-                    <img src="{{ $villa->image_villa ? asset('/storage/villa/' . $villa->image_villa) : asset('/img/villa1.jpg') }}"
+                    <img src="{{ $villa->villa_image != 'default.png' ? asset('/storage/avatars/' . $villa->villa_image) : asset('/img/villa/' . $villa->villa_image) }}"
                         class="h-75" alt="">
                 </div>
 
