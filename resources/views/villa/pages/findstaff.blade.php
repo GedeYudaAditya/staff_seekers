@@ -55,6 +55,18 @@
                 </div>
             </form>
         </div>
+        {{-- Alert --}}
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @elseif(session('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         <div class="row justify-content-center mt-3 ">
             @forelse ($staffs as $staff)
                 <div class="col-lg-4 px-3 py-3">
@@ -86,7 +98,8 @@
                                 </div>
                                 <div class="col-md-3">
                                     {{-- {{ route('villa.desc', $staff->username) }} --}}
-                                    <a href="{{ route('villa.find-staff.detail', $staff->username) }}" class="btn btn-sm btn-primary">Apply</a>
+                                    <a href="{{ route('villa.find-staff.detail', $staff->username) }}"
+                                        class="btn btn-sm btn-primary">Apply</a>
                                 </div>
                             </div>
                         </div>
