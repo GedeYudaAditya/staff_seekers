@@ -28,7 +28,8 @@
                     class="nav_link {{ Route::is('villa.pendaftar') ? 'active' : '' }}">
                     <i class='fa-solid fa-users nav_icon'></i> <span class="nav_name">Kelola Pendaftar</span>
                 </a>
-                <a href="#" class="nav_link">
+                <a href="{{ route('villa.permintaanStaff') }}"
+                    class="nav_link {{ Route::is('villa.permintaanStaff') ? 'active' : '' }}">
                     <i class="fa-solid fa-arrow-up nav_icon"></i> <span class="nav_name">Permintaan ke Staff</span>
                 </a>
                 {{-- <a href="#" class="nav_link">

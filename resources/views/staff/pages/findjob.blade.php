@@ -34,7 +34,7 @@
                 <div class="col-lg-4 px-3 py-3">
                     <div class="card h-100 overflow-hidden" style="width: 18rem;">
                         <div class="bg-success bg-opacity-75 py-2 px-3 position-absolute text-white fw-bold">Hiring!!</div>
-                        <img src="{{ $villa->image_villa ? asset('/storage/villa/' . $villa->image_villa) : asset('/img/villa1.jpg') }}"
+                        <img src="{{ $villa->villa_image != 'default.png' ? asset('/storage/avatars/' . $villa->villa_image) : asset('/img/villa/' . $villa->villa_image) }}"
                             class="card-img-top" alt="...">
                         <div class="card-body position-relative">
                             <a href="{{ route('staff.desc', $villa->username) }}" class="text-primary text-decoration-none">

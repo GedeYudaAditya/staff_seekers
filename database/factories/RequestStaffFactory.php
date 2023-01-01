@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,9 +17,13 @@ class RequestStaffFactory extends Factory
      */
     public function definition()
     {
+        // Take all id from staff and villa
+        $dataIdStaff = User::where('role', 'staff')->pluck('id')->toArray();
+        $dataIdVilla = User::where('role', 'villa')->pluck('id')->toArray();
+
         return [
-            'user_id' => fake()->numberBetween(90, 103),
-            'villa_id' => fake()->numberBetween(90, 103),
+            'user_id' => fake()->randomElement($dataIdStaff),
+            'villa_id' => fake()->randomElement($dataIdVilla),
             'status' => fake()->randomElement(['pending', 'accepted', 'rejected']),
         ];
     }

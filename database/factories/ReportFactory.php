@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +17,15 @@ class ReportFactory extends Factory
      */
     public function definition()
     {
+        // Take all id from staff and villa
+        $dataId = User::where('role', 'staff')->orWhere('role', 'villa')->pluck('id')->toArray();
+
         return [
-            //
+            'title' => $this->faker->sentence,
+            'description' => $this->faker->paragraph,
+            'status' => $this->faker->randomElement(['pending', 'processed', 'done']),
+            'type' => $this->faker->randomElement(['bug', 'report']),
+            'user_id' => $this->faker->randomElement($dataId),
         ];
     }
 }

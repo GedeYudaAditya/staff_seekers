@@ -46,10 +46,19 @@
             <div class="rounded border border-danger bg-white mt-3 p-3 shadow">
                 <h4 class="text-center mb-3">Account Management</h4>
 
-                <div class="row justify-content-center mb-5">
-                    {{-- unsplash --}}
-                    <img src="{{ auth()->user()->image ? asset('/storage/avatars/' . auth()->user()->image) : asset('/img/no-image-icon.png') }}"
-                        class="img-fluid rounded-circle col-12 p-0" style="height:200px; width: 200px;" alt="">
+                <div class="row justify-content-evenly mb-5">
+                    <div class="col-5 row justify-content-center">
+                        {{-- unsplash --}}
+                        <img src="{{ auth()->user()->image != 'default.png' ? asset('/storage/avatars/' . auth()->user()->image) : asset('/img/avatars/' . auth()->user()->image) }}"
+                            class="img-fluid rounded-circle col-12 p-0" style="height:200px; width: 200px;" alt="">
+                        <h5 class="text-center">Your Photo Porfile</h4>
+                    </div>
+                    <div class="col-5  row justify-content-center">
+                        {{-- unsplash --}}
+                        <img src="{{ auth()->user()->villa_image != 'default.png' ? asset('/storage/avatars/' . auth()->user()->villa_image) : asset('/img/villa/' . auth()->user()->villa_image) }}"
+                            class="img-fluid rounded-circle col-12 p-0" style="height:200px; width: 200px;" alt="">
+                        <h5 class="text-center">Your Villa Photo</h4>
+                    </div>
                 </div>
 
                 {{-- Alert --}}
@@ -133,8 +142,8 @@
                     <div class="row mb-3">
                         <label for="salary" class="col-sm-2 col-form-label">Salary</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control @error('salary') is-invalid @enderror" name="salary"
-                                id="salary"
+                            <input type="text" class="form-control @error('salary') is-invalid @enderror"
+                                name="salary" id="salary"
                                 value="{{ auth()->user()->salary ? auth()->user()->salary : old('salary') }}">
                         </div>
 

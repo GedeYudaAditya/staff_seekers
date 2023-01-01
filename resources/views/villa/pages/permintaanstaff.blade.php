@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="container py-5 h-100">
-        <h1>List Pendaftar</h1>
+        <h1>List Permintaan Ke staff</h1>
 
         {{-- Alert --}}
         @if (session('success'))
@@ -39,8 +39,8 @@
                             <tbody>
                                 @foreach ($jobs as $job)
                                     <tr>
-                                        <td>{{ $job->user->name }}</td>
-                                        <td>{{ $job->user->address }}</td>
+                                        <td>{{ $job->staff->name }}</td>
+                                        <td>{{ $job->staff->address }}</td>
                                         {{-- <td>{{ $job->user->cv }}</td> --}}
                                         {{-- <td>{{ $job->villa->salary }}</td> --}}
                                         <td>
@@ -55,38 +55,36 @@
                                         <td class="row">
                                             {{-- {{ route('staff.jobdetail', $job->id) }}
                                             {{ route('staff.jobcancle', $job->id) }} --}}
-                                            <form action="{{ route('villa.kelolaPendaftar', $job->user->username) }}"
-                                                onsubmit="return confirm('Yakin untuk melakukan aksi ini untuk lamaran staff {{ $job->user->name }}?')"
+                                            <form action="{{ route('villa.kelolaPermintaan', $job->staff->username) }}"
+                                                onsubmit="return confirm('Yakin untuk melakukan aksi ini untuk lamaran staff {{ $job->staff->name }}?')"
                                                 method="post">
                                                 @csrf
                                                 <div class="btn-group" role="group"
                                                     aria-label="Basic mixed styles example">
                                                     <button type="button" class="btn btn-sm btn-primary col-md-4"
                                                         data-bs-toggle="modal"
-                                                        data-bs-target="#exampleModal{{ $job->user->id }}"><i
+                                                        data-bs-target="#exampleModal{{ $job->staff->id }}"><i
                                                             class="fa fa-info" aria-hidden="true"></i></button>
                                                     @if ($job->status == 'pending')
-                                                        <button type="submit"
+                                                        {{-- <button type="submit"
                                                             onclick="requested('Yakin untuk menerima lamaran staff ini?')"
                                                             value="ya" name="terima"
                                                             class="btn btn-sm btn-success col-md-4"><i class="fa fa-plus"
-                                                                aria-hidden="true"></i></button>
+                                                                aria-hidden="true"></i></button> --}}
                                                         <button type="submit"
                                                             onclick="requested('Prosess ini tidak dapet dikembalikan lagi. Yakin untuk menolak lamaran staff ini? ')"
-                                                            value="tidak" name="terima"
+                                                            value="batal" name="terima"
                                                             class="btn btn-sm btn-danger col-md-4"><i class="fa fa-minus"
                                                                 aria-hidden="true"></i></button>
                                                     @elseif ($job->status == 'accepted')
-                                                        <button disabled class="btn btn-sm btn-outline-success col-md-4"><i
-                                                                class="fa fa-plus" aria-hidden="true"></i></button>
-                                                        <button
-                                                            onclick="requested('Yakin untuk mengembalikan staff ini ke pending?')"
-                                                            type="submit" value="pending" name="terima"
-                                                            class="btn btn-sm btn-secondary col-md-4"><i class="fa fa-undo"
-                                                                aria-hidden="true"></i></button>
+                                                        {{-- <button disabled class="btn btn-sm btn-outline-success col-md-4"><i
+                                                                class="fa fa-plus" aria-hidden="true"></i></button> --}}
+                                                        <button disabled
+                                                            class="btn btn-sm btn-outline-secondary col-md-4"><i
+                                                                class="fa fa-minus" aria-hidden="true"></i></button>
                                                     @else
-                                                        <button disabled class="btn btn-sm btn-outline-success col-md-4"><i
-                                                                class="fa fa-plus" aria-hidden="true"></i></button>
+                                                        {{-- <button disabled class="btn btn-sm btn-outline-success col-md-4"><i
+                                                                class="fa fa-plus" aria-hidden="true"></i></button> --}}
                                                         <button disabled
                                                             class="btn btn-sm btn-outline-secondary col-md-4"><i
                                                                 class="fa fa-minus" aria-hidden="true"></i></button>
@@ -97,7 +95,7 @@
                                     </tr>
 
                                     <!-- Modal -->
-                                    <div class="modal fade" id="exampleModal{{ $job->user->id }}" tabindex="-1"
+                                    <div class="modal fade" id="exampleModal{{ $job->staff->id }}" tabindex="-1"
                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
                                             <div class="modal-content">
@@ -111,47 +109,47 @@
                                                         <div class="card mb-3" style="width: 100%">
                                                             <div class="row g-0">
                                                                 <div class="col-md-4">
-                                                                    <img src="{{ $job->user->image != 'default.png' ? asset('/storage/avatars/' . $job->user->image) : asset('/img/avatars/' . $job->user->image) }}"
+                                                                    <img src="{{ $job->staff->image != 'default.png' ? asset('/storage/avatars/' . $job->staff->image) : asset('/img/avatars/' . $job->staff->image) }}"
                                                                         class="img-fluid rounded-start h-100"
-                                                                        alt="{{ $job->user->name }}">
+                                                                        alt="{{ $job->staff->name }}">
                                                                 </div>
                                                                 <div class="col-md-8">
                                                                     <div class="card-body">
                                                                         <h3 class="card-title fw-bold">
-                                                                            {{ $job->user->name }}
+                                                                            {{ $job->staff->name }}
                                                                         </h3>
                                                                         <div class="row mb-3">
                                                                             <div class="col-12">
                                                                                 <div class="fs-small text-md-start">
                                                                                     <i class="fa fa-envelope"
                                                                                         aria-hidden="true"></i>
-                                                                                    Email : {{ $job->user->email }}
+                                                                                    Email : {{ $job->staff->email }}
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-12">
                                                                                 <div class="fs-small text-md-start">
                                                                                     <i class="fa fa-phone"
                                                                                         aria-hidden="true"></i>
-                                                                                    Phone : {{ $job->user->phone }}
+                                                                                    Phone : {{ $job->staff->phone }}
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-12">
                                                                                 <div class="fs-small">
                                                                                     <i class="fa fa-map"
                                                                                         aria-hidden="true"></i>
-                                                                                    Adderss : {{ $job->user->address }}
+                                                                                    Adderss : {{ $job->staff->address }}
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-12">
                                                                                 <div class="fw-bold">
                                                                                     <i class="fa fa-money"
                                                                                         aria-hidden="true"></i>
-                                                                                    Salary : {{ $job->user->salary }}
+                                                                                    Salary : {{ $job->staff->salary }}
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                         <p class="card-text">
-                                                                            {{ $job->user->bio }}
+                                                                            {{ $job->staff->bio }}
                                                                         </p>
                                                                     </div>
                                                                 </div>
@@ -160,7 +158,7 @@
                                                         <div class="container">
                                                             <h4>Description</h4>
                                                             <p>
-                                                                {{ $job->user->detailBio }}
+                                                                {{ $job->staff->detailBio }}
                                                             </p>
                                                             <hr>
                                                             <h4>Skills</h4>
@@ -171,7 +169,7 @@
                                                             </ul>
                                                             <hr>
                                                             <form
-                                                                action="{{ route('villa.cvStaff', $job->user->username) }}"
+                                                                action="{{ route('villa.cvStaff', $job->staff->username) }}"
                                                                 method="post">
                                                                 @csrf
                                                                 <div class="text-center">

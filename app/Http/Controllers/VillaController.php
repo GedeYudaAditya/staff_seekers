@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use Illuminate\Support\Str;
 use App\Models\Announcement;
 use App\Models\RequestStaff;
 use App\Models\RequestVilla;
-use App\Models\User;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Database\Eloquent\Builder;
 
 class VillaController extends Controller
 {
@@ -240,6 +241,16 @@ class VillaController extends Controller
         ]);
     }
 
+    public function permintaanStaff()
+    {
+        $jobs = RequestVilla::where('user_id', auth()->user()->id)->get();
+        return view('villa.pages.permintaanStaff', [
+            'title' => 'Permintaan Staff',
+            'active' => 'villa.permintaanStaff',
+            'jobs' => $jobs
+        ]);
+    }
+
     public function requestStaff(Request $request, User $user)
     {
         // $role = [
@@ -321,6 +332,44 @@ class VillaController extends Controller
                 DB::rollBack();
                 return redirect()->back()->with('error', $e->getMessage());
             }
+        }
+    }
+
+    public function kelolaPermintaan(Request $request, User $user)
+    {
+        // dd($request->all());
+        if ($request->terima == 'batal') {
+            try {
+                DB::beginTransaction();
+
+                RequestVilla::where('staff_id', $user->id)
+                    ->where('user_id', auth()->user()->id)
+                    ->delete();
+
+                DB::commit();
+
+                return redirect()->back()->with('success', 'Request sent successfully');
+            } catch (\Throwable $e) {
+                DB::rollBack();
+                return redirect()->back()->with('error', $e->getMessage());
+            }
+        }
+    }
+
+    public function downloadCVStaff(Request $request, User $user)
+    {
+        try {
+            $file = public_path() . '/storage/cv/' . $user->cv;
+
+            // dd($user->name);
+            $headers = array(
+                'Content-Type: application/pdf',
+            );
+
+            return Response::download($file, "CV Staff - $user->name - $user->cv", $headers);
+        } catch (\Throwable $e) {
+            // DB::rollBack();
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
 }

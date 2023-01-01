@@ -16,15 +16,16 @@ return new class extends Migration
         Schema::create('contracts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('description');
+            $table->longText('description');
             $table->string('status');
             $table->foreignId('staff_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('villa_id')->constrained('users')->onDelete('cascade');
             $table->string('start_date');
             $table->string('end_date');
             $table->string('total_price');
-            $table->string('signatures');
-            $table->string('payment_status');
+            $table->string('signatures_staff');
+            $table->string('signatures_villa');
+            $table->enum('payment_status', ['pending', 'paid']);
             $table->timestamps();
         });
     }

@@ -43,7 +43,7 @@
 
             <div class="row justify-content-center mb-5">
                 {{-- unsplash --}}
-                <img src="{{ auth()->user()->image ? asset('/storage/avatars/' . auth()->user()->image) : asset('/img/no-image-icon.png') }}"
+                <img src="{{ auth()->user()->image != 'default.png' ? asset('/storage/avatars/' . auth()->user()->image) : asset('/img/avatars/' . auth()->user()->image) }}"
                     class="img-fluid rounded-circle col-12 p-0" style="height:200px; width: 200px;" alt="">
             </div>
 
