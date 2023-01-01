@@ -170,8 +170,9 @@
                         </div>
                     @enderror
                 </div>
+
                 <div class="row mb-3">
-                    <label for="cv" class="col-sm-2 col-form-label">CV</label>
+                    <label for="cv" class="col-sm-2 col-form-label">Update CV</label>
                     <div class="col-sm-10">
                         <input class="form-control @error('name') is-invalid @enderror" name="cv" type="file"
                             id="cv">
@@ -182,6 +183,15 @@
                         </div>
                     @enderror
                 </div>
+                {{-- show cv --}}
+                @if (auth()->user()->cv)
+                    <div class="row mb-3">
+                        <label for="cv" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-10">
+                            <a href="{{ asset('storage/cv/' . auth()->user()->cv) }}" target="_blank">Show CV</a>
+                        </div>
+                    </div>
+                @endif
                 <div class="row mb-3">
                     <label for="password" class="col-sm-2 col-form-label">Password</label>
                     <div class="col-sm-10">
