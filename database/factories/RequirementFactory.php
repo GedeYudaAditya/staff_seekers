@@ -18,7 +18,7 @@ class RequirementFactory extends Factory
     {
         return [
             'name' => fake()->sentence(3),
-            'user_id' => fake()->numberBetween(1, 100),
+            'user_id' => fake()->numberBetween(1, 103),
         ];
     }
 }

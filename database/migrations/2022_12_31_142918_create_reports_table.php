@@ -16,9 +16,10 @@ return new class extends Migration
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('description');
-            $table->string('status');
+            $table->longText('description');
+            $table->enum('status', ['pending', 'processed', 'done']);
             $table->enum('type', ['bug', 'report']);
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

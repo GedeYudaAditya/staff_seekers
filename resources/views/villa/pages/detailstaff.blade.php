@@ -8,7 +8,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">
-                                <img src="{{ $staff->image }}" alt="" class="img-fluid">
+                                <img src="{{ $staff->image != 'default.png' ? asset('/storage/avatars/' . $staff->image) : asset('/img/avatars/' . $staff->image) }}" alt="" class="img-fluid">
                             </div>
                             <div class="col-md-8">
                                 <h3>{{ $staff->name }}</h3>

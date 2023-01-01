@@ -67,16 +67,18 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/dashboard/profile', [VillaController::class, 'profile'])->name('villa.profile');
         Route::get('/dashboard/lowongan', [VillaController::class, 'lowongan'])->name('villa.lowongan');
         Route::get('/dashboard/pendaftar', [VillaController::class, 'pendaftar'])->name('villa.pendaftar');
+        Route::get('/dashboard/permintaan', [VillaController::class, 'permintaanStaff'])->name('villa.permintaanStaff');
 
         // Action Route
         // Route::post('/dashboard/pendaftar/request/{user:username}', [VillaController::class, 'requestStaff'])->name('villa.requestStaff');
         Route::post('/dashboard/updateProfile', [VillaController::class, 'updateProfile'])->name('villa.updateProfil');
         Route::post('/dashboard/lowongan/create', [VillaController::class, 'tambahLowongan'])->name('villa.createLowongan');
-        
+
         // Request dari villa ke staff
         Route::post('/request/{user:username}', [VillaController::class, 'requestStaff'])->name('villa.requestStaff');
         Route::post('/dashboard/pendaftar/kelola/{user:username}', [VillaController::class, 'kelolaPendaftar'])->name('villa.kelolaPendaftar');
-
+        Route::post('/dashboard/permintaan/kelola/{user:username}', [VillaController::class, 'kelolaPermintaan'])->name('villa.kelolaPermintaan');
+        Route::post('/dashboard/pendaftar/cv/{user:username}', [VillaController::class, 'downloadCVStaff'])->name('villa.cvStaff');
     });
 
     // Group Admin Route

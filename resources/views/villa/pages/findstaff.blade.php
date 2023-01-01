@@ -72,7 +72,7 @@
                 <div class="col-lg-4 px-3 py-3">
                     <div class="card h-100 overflow-hidden" style="width: 18rem;">
                         <div class="bg-success bg-opacity-75 py-2 px-3 position-absolute text-white fw-bold">Hiring!!</div>
-                        <img src="{{ $staff->image ? asset('/storage/avatars/' . $staff->image) : asset('/img/villa1.jpg') }}"
+                        <img src="{{ $staff->image != 'default.png' ? asset('/storage/avatars/' . $staff->image) : asset('/img/avatars/' . $staff->image) }}"
                             class="card-img-top" alt="...">
                         <div class="card-body position-relative">
                             <a href="{{ route('staff.desc', $staff->username) }}" class="text-primary text-decoration-none">

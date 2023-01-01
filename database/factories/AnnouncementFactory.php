@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +17,10 @@ class AnnouncementFactory extends Factory
      */
     public function definition()
     {
+        // Take all id from staff villa
+        $dataIdVilla = User::where('role', 'villa')->pluck('id')->toArray();
         return [
-            'user_id' => fake()->numberBetween(90, 103),
+            'user_id' => fake()->randomElement($dataIdVilla),
             'title' => fake()->sentence(3),
             'hiring' => fake()->boolean,
             'slug' => fake()->slug,

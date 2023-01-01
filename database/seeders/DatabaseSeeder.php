@@ -5,9 +5,12 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Announcement;
+use App\Models\Contract;
+use App\Models\Report;
 use App\Models\RequestStaff;
 use App\Models\RequestVilla;
 use App\Models\Requirement;
+use App\Models\Transaction;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -27,7 +30,7 @@ class DatabaseSeeder extends Seeder
             'username' => 'admin',
             'role' => 'admin',
             'status' => 'active',
-            'image' => 'https://picsum.photos/200/300',
+            'image' => 'default.png',
             'password' => bcrypt('admin'),
             'phone' => '081234567890',
         ]);
@@ -43,7 +46,7 @@ class DatabaseSeeder extends Seeder
             'bio' => 'I am a staff',
             'detailBio' => 'detail bio staff',
             'salary' => '1000000 - 2000000',
-            'image' => 'https://picsum.photos/200/300',
+            'image' => 'default.png',
             'address' => 'Jl. Kebon Jeruk No. 1, Jakarta Barat',
             'phone' => '081234567890'
         ]);
@@ -60,7 +63,8 @@ class DatabaseSeeder extends Seeder
             'bio' => 'I am a villa',
             'detailBio' => 'detail bio villa',
             'salary' => '1000000 - 2000000',
-            'image' => 'https://picsum.photos/200/300',
+            'image' => 'default.png',
+            'villa_image' => 'default.png',
             'address' => 'Jl. Kebon Jeruk No. 1, Jakarta Barat',
             'phone' => '081234567890'
         ]);
@@ -71,5 +75,11 @@ class DatabaseSeeder extends Seeder
         RequestVilla::factory(100)->create();
 
         Announcement::factory(100)->create();
+
+        Report::factory(100)->create();
+
+        Contract::factory(10)->create();
+
+        Transaction::factory(10)->create();
     }
 }
