@@ -27,19 +27,31 @@
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form> --}}
             @auth
-                <div class="btn-lg">
-                    <form action="{{ route('signout') }}" method="POST">
-                        <a href="{{ route('staff.manage') }}" class="btn btn-outline-danger me-2">Manage</a>
-                        @csrf
-                        <button type="submit" class="btn btn-danger"><i class="fa-solid fa-arrow-right-from-bracket"></i>
-                            Logout</button>
-                    </form>
-                </div>
+            <ul class="navbar-nav px-3">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Menu
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{{ route('staff.manage') }}">Manage</a></li>
+                        <li><a class="dropdown-item" href="{{ route('staff.contractList') }}">Contract</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="btn-lg">
+                <form action="{{ route('signout') }}" method="POST">
+                    {{-- <a href="{{ route('staff.manage') }}" class="btn btn-outline-danger me-2">Manage</a> --}}
+                    @csrf
+                    <button type="submit" class="btn btn-danger"><i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        Logout</button>
+                </form>
+            </div>
             @else
-                <div class="btn-lg">
-                    <a href="{{ route('Auth') }}" class="btn btn-outline-danger me-2">Sign In</a>
-                    <a href="{{ route('register') }}" class="btn btn-danger">Sign Up</a>
-                </div>
+            <div class="btn-lg">
+                <a href="{{ route('Auth') }}" class="btn btn-outline-danger me-2">Sign In</a>
+                <a href="{{ route('register') }}" class="btn btn-danger">Sign Up</a>
+            </div>
             @endauth
         </div>
     </div>
