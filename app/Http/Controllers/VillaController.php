@@ -239,4 +239,88 @@ class VillaController extends Controller
             'jobs' => $jobs
         ]);
     }
+
+    public function requestStaff(Request $request, User $user)
+    {
+        // $role = [
+        //     'message' => 'required',
+        // ];
+
+        try {
+
+            // $validateData = $request->validate($role);
+
+            DB::beginTransaction();
+
+            RequestVilla::create([
+                'user_id' => auth()->user()->id,
+                'staff_id' => $user->id,
+                'status' => 'pending',
+            ]);
+
+            DB::commit();
+
+            return redirect()->back()->with('success', 'Request sent successfully');
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
+    public function kelolaPendaftar(Request $request, User $user)
+    {
+        // dd($request->all());
+        if ($request->terima == 'ya') {
+            try {
+                DB::beginTransaction();
+
+                RequestStaff::where('user_id', $user->id)
+                    ->where('villa_id', auth()->user()->id)
+                    ->update([
+                        'status' => 'accepted',
+                    ]);
+
+                DB::commit();
+
+                return redirect()->back()->with('success', 'Request sent successfully');
+            } catch (\Throwable $e) {
+                DB::rollBack();
+                return redirect()->back()->with('error', $e->getMessage());
+            }
+        } else if ($request->terima == 'pending') {
+            try {
+                DB::beginTransaction();
+
+                RequestStaff::where('user_id', $user->id)
+                    ->where('villa_id', auth()->user()->id)
+                    ->update([
+                        'status' => 'pending',
+                    ]);
+
+                DB::commit();
+
+                return redirect()->back()->with('success', 'Request sent successfully');
+            } catch (\Throwable $e) {
+                DB::rollBack();
+                return redirect()->back()->with('error', $e->getMessage());
+            }
+        } else {
+            try {
+                DB::beginTransaction();
+
+                RequestStaff::where('user_id', $user->id)
+                    ->where('villa_id', auth()->user()->id)
+                    ->update([
+                        'status' => 'rejected',
+                    ]);
+
+                DB::commit();
+
+                return redirect()->back()->with('success', 'Request sent successfully');
+            } catch (\Throwable $e) {
+                DB::rollBack();
+                return redirect()->back()->with('error', $e->getMessage());
+            }
+        }
+    }
 }

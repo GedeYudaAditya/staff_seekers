@@ -7,6 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Staff Seekers | {{ $title }} </title>
     @include('villa.layouts._css')
+
+    @yield('css')
+
 </head>
 
 @include('villa.layouts._nav_dashboard')
@@ -16,7 +19,7 @@
     @include('villa.layouts._nav')
 
     {{-- Main content --}}
-    <div class="height-100 mt-5rem">
+    <div class="mt-5rem">
         @yield('content')
     </div>
     {{-- End main content --}}

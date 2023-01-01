@@ -51,7 +51,7 @@
                     </a>
                 </div>
                 <div class="button d-grid py-5">
-                    <form action="{{ route('staff.requestJob', $staff->username) }}" method="post">
+                    <form action="{{ route('villa.requestStaff', $staff->username) }}" method="post">
                         {{-- notif --}}
                         @if (session('success'))
                             <div class="alert alert-success">
@@ -65,12 +65,12 @@
                         @endif
                         @csrf
                         @if ($staffRequest == 'null')
-                            <button type="submit" class="btn btn-danger">Request Job</button>
+                            <button type="submit" class="btn btn-danger">Hire Staff</button>
                         @else
                             @if ($staffRequest == 'rejected')
-                                <button type="submit" class="btn btn-danger">Request Job</button>
+                                <button type="submit" class="btn btn-danger">Hire Staff</button>
                             @else
-                                <button type="submit" class="btn btn-danger" disabled>Request Job</button>
+                                <button type="submit" class="btn btn-danger" disabled>Hire Staff</button>
                             @endif
                         @endif
                     </form>

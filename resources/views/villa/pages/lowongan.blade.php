@@ -1,5 +1,9 @@
 @extends('villa.layouts.dashboard')
 
+@section('css')
+    <link rel="stylesheet" href="{{ asset('/css/villa/style.css') }}">
+@endsection
+
 @section('content')
     <div class="container py-5 h-100">
         <h1>Lowongan</h1>
