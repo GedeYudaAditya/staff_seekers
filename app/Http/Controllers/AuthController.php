@@ -93,6 +93,8 @@ class AuthController extends Controller
             $user = User::create([
                 'name' => $credentials['name'],
                 'username' => $credentials['username'],
+                'image' => 'default.png',
+                'villa_image' => 'default.png',
                 'email' => $credentials['email'],
                 'role' => $credentials['role'],
                 'status' => $credentials['status'],
