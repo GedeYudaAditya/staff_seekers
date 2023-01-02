@@ -10,9 +10,13 @@ class Transaction extends Model
     use HasFactory;
 
     protected $fillable = [
+        'villa_id',
         'contract_id',
         'code_transaction',
-        'villa_id',
+        'price',
+        'total_price',
+        'payment_status',
+        'status',
     ];
 
     public function contract()

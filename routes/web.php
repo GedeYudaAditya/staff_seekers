@@ -68,6 +68,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/dashboard/lowongan', [VillaController::class, 'lowongan'])->name('villa.lowongan');
         Route::get('/dashboard/pendaftar', [VillaController::class, 'pendaftar'])->name('villa.pendaftar');
         Route::get('/dashboard/permintaan', [VillaController::class, 'permintaanStaff'])->name('villa.permintaanStaff');
+        Route::get('/dashboard/manageContract', [VillaController::class, 'manageContract'])->name('villa.manageContract');
 
         // Action Route
         // Route::post('/dashboard/pendaftar/request/{user:username}', [VillaController::class, 'requestStaff'])->name('villa.requestStaff');

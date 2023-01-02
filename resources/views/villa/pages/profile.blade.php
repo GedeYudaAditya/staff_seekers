@@ -55,7 +55,7 @@
                     </div>
                     <div class="col-5  row justify-content-center">
                         {{-- unsplash --}}
-                        <img src="{{ auth()->user()->villa_image != 'default.png' ? asset('/storage/avatars/' . auth()->user()->villa_image) : asset('/img/villa/' . auth()->user()->villa_image) }}"
+                        <img src="{{ auth()->user()->villa_image != 'default.png' ? asset('/storage/villa/' . auth()->user()->villa_image) : asset('/img/villa/' . auth()->user()->villa_image) }}"
                             class="img-fluid rounded-circle col-12 p-0" style="height:200px; width: 200px;" alt="">
                         <h5 class="text-center">Your Villa Photo</h4>
                     </div>
@@ -200,12 +200,12 @@
                         @enderror
                     </div>
                     <div class="row mb-3">
-                        <label for="image_villa" class="col-sm-2 col-form-label">Villa Image</label>
+                        <label for="villa_image" class="col-sm-2 col-form-label">Villa Image</label>
                         <div class="col-sm-10">
-                            <input class="form-control @error('image_villa') is-invalid @enderror" name="image_villa"
-                                type="file" id="image_villa">
+                            <input class="form-control @error('villa_image') is-invalid @enderror" name="villa_image"
+                                type="file" id="villa_image">
                         </div>
-                        @error('image_villa')
+                        @error('villa_image')
                             <div class="invalid-feedback">
                                 {{ $massage }}
                             </div>

@@ -11,7 +11,7 @@
                 </div>
                 <div class="card w-100">
                     <div class="bg-secondary" style="height: 300px">
-                        <img src="{{ $villa->villa_image != 'default.png' ? asset('/storage/avatars/' . $villa->villa_image) : asset('/img/villa/' . $villa->villa_image) }}"
+                        <img src="{{ $villa->villa_image != 'default.png' ? asset('/storage/villa/' . $villa->villa_image) : asset('/img/villa/' . $villa->villa_image) }}"
                             class="img-fluid" alt="" style="height: 100%">
                     </div>
                 </div>

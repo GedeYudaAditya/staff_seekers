@@ -32,6 +32,10 @@
                     class="nav_link {{ Route::is('villa.permintaanStaff') ? 'active' : '' }}">
                     <i class="fa-solid fa-arrow-up nav_icon"></i> <span class="nav_name">Permintaan ke Staff</span>
                 </a>
+                <a href="{{ route('villa.manageContract') }}"
+                    class="nav_link {{ Route::is('villa.manageContract') ? 'active' : '' }}">
+                    <i class="fa-solid fa-certificate nav_icon"></i> <span class="nav_name">Menejemen Kontrak </span>
+                </a>
                 {{-- <a href="#" class="nav_link">
                     <i class='fa-solid fa-bullhorn nav_icon'></i> <span class="nav_name">User Report</span>
                 </a>

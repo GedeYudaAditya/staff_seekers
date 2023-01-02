@@ -15,9 +15,13 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('villa_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('contract_id')->constrained('contracts')->onDelete('cascade');
             $table->string('code_transaction');
-            $table->foreignId('villa_id')->constrained('users')->onDelete('cascade');
+            $table->string('price');
+            $table->string('total_price');
+            $table->enum('payment_status', ['pending', 'valid', 'invalid']);
+            $table->enum('status', ['process', 'send', 'received', 'done']);
             $table->timestamps();
         });
     }

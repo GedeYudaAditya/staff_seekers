@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Support\Str;
 use App\Models\Announcement;
+use App\Models\Contract;
 use App\Models\RequestStaff;
 use App\Models\RequestVilla;
 use Illuminate\Http\Request;
@@ -114,7 +115,7 @@ class VillaController extends Controller
             'detailBio' => 'required',
             'address' => 'required',
             'image' => 'mimes:jpg,jpeg,png|max:2048',
-            'image_villa' => 'required|mimes:jpg,jpeg,png|max:2048',
+            'villa_image' => 'required|mimes:jpg,jpeg,png|max:2048',
         ];
 
         try {
@@ -134,20 +135,20 @@ class VillaController extends Controller
 
             $validateData = $request->validate($role);
 
-            if ($request->hasFile('image_villa')) {
-                Storage::delete('public/villa/' . auth()->user()->cv);
+            if ($request->hasFile('villa_image')) {
+                Storage::delete('villa/' . auth()->user()->villa_image);
 
-                $file = $request->file('image_villa');
+                $file = $request->file('villa_image');
                 $filename = Str::random(10) . '_' . Str::slug($file->getClientOriginalName()) . '.' . $file->getClientOriginalExtension();
 
                 $path = $file->storeAs('villa', $filename);
 
-                $validateData['image_villa'] = $filename;
-                $validateData['image_villa_path'] = $path;
+                $validateData['villa_image'] = $filename;
+                $validateData['villa_image_path'] = $path;
             }
 
             if ($request->hasFile('image')) {
-                Storage::delete('public/avatars/' . auth()->user()->image);
+                Storage::delete('avatars/' . auth()->user()->image);
 
                 $file = $request->file('image');
                 $filename = Str::random(10) . '_' . Str::slug($file->getClientOriginalName()) . '.' . $file->getClientOriginalExtension();
@@ -162,6 +163,8 @@ class VillaController extends Controller
             DB::beginTransaction();
 
             $user = User::find(auth()->user()->id);
+
+            // dd($validateData);
 
             $user->update($validateData);
 
@@ -371,5 +374,26 @@ class VillaController extends Controller
             // DB::rollBack();
             return redirect()->back()->with('error', $e->getMessage());
         }
+    }
+
+    public function manageContract(){
+        $contracts = Contract::where('villa_id', auth()->user()->id)->get();
+
+        // Get all user staff that have accepted the request and user staff that request to join villa
+        $staffsRequest = RequestStaff::where('villa_id', auth()->user()->id)
+            ->where('status', 'accepted')
+            ->get();
+
+        $villaStaffsRequest = RequestVilla::where('user_id', auth()->user()->id)
+            ->where('status', 'accepted')
+            ->get();
+        
+        return view('villa.pages.manageContract', [
+            'title' => 'Manage Contract',
+            'active' => 'villa.manageContract',
+            'contracts' => $contracts,
+            'staffsRequest' => $staffsRequest,
+            'villaStaffsRequest' => $villaStaffsRequest
+        ]);
     }
 }
