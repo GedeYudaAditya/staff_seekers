@@ -46,6 +46,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/manage', [StaffController::class, 'manage'])->name('staff.manage');
         Route::get('manage/listRequestedJob', [StaffController::class, 'requestedJobList'])->name('staff.listRequestedJob');
         Route::get('manage/listReceivedJob', [StaffController::class, 'receivedJobList'])->name('staff.listReceivedJob');
+        Route::get('manage/contractList', [StaffController::class, 'contractList'])->name('staff.contractList');
 
         Route::get('/desc/{user:username}', [StaffController::class, 'desc'])->name('staff.desc');
 
