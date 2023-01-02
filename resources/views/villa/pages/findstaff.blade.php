@@ -1,4 +1,4 @@
-@extends('staff.layouts.app')
+@extends('villa.layouts.app')
 
 @section('content')
     {{-- Intro Section Start --}}
@@ -71,7 +71,8 @@
             @forelse ($staffs as $staff)
                 <div class="col-lg-4 px-3 py-3">
                     <div class="card h-100 overflow-hidden" style="width: 18rem;">
-                        <div class="bg-success bg-opacity-75 py-2 px-3 position-absolute text-white fw-bold">Hiring!!</div>
+                        <div class="bg-success bg-opacity-75 py-2 px-3 position-absolute text-white fw-bold">Need Work!!
+                        </div>
                         <img src="{{ $staff->image != 'default.png' ? asset('/storage/avatars/' . $staff->image) : asset('/img/avatars/' . $staff->image) }}"
                             class="card-img-top" alt="...">
                         <div class="card-body position-relative">

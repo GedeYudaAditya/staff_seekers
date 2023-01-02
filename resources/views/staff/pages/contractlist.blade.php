@@ -28,7 +28,6 @@
                                     {{-- <td>{{ $contract->villa->name }}</td> --}}
                                     <td>{{ $contract->villa->address }}</td>
                                     {{-- <td>{{ $contract->villa->salary }}</td> --}}
-
                                     <td>
                                         @if ($contract->status == 'pending')
                                         <span class="badge bg-secondary py-2">Pending</span>
@@ -69,15 +68,15 @@
                                 @endforeach
                             </tbody>
                         </table>
+
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <script>
-        $(document).ready(function() {
-            $('#table_id2').DataTable();
-        });
-    </script>
-    @endsection
+        <script>
+            $(document).ready(function() {
+                $('#table_id2').DataTable();
+            });
+        </script>
+        @endsection

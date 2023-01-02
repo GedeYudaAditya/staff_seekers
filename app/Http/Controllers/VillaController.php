@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Support\Str;
 use App\Models\Announcement;
+use App\Models\Contract;
 use App\Models\RequestStaff;
 use App\Models\RequestVilla;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -114,7 +116,7 @@ class VillaController extends Controller
             'detailBio' => 'required',
             'address' => 'required',
             'image' => 'mimes:jpg,jpeg,png|max:2048',
-            'image_villa' => 'required|mimes:jpg,jpeg,png|max:2048',
+            'villa_image' => 'required|mimes:jpg,jpeg,png|max:2048',
         ];
 
         try {
@@ -134,20 +136,20 @@ class VillaController extends Controller
 
             $validateData = $request->validate($role);
 
-            if ($request->hasFile('image_villa')) {
-                Storage::delete('public/villa/' . auth()->user()->cv);
+            if ($request->hasFile('villa_image')) {
+                Storage::delete('villa/' . auth()->user()->villa_image);
 
-                $file = $request->file('image_villa');
+                $file = $request->file('villa_image');
                 $filename = Str::random(10) . '_' . Str::slug($file->getClientOriginalName()) . '.' . $file->getClientOriginalExtension();
 
                 $path = $file->storeAs('villa', $filename);
 
-                $validateData['image_villa'] = $filename;
-                $validateData['image_villa_path'] = $path;
+                $validateData['villa_image'] = $filename;
+                $validateData['villa_image_path'] = $path;
             }
 
             if ($request->hasFile('image')) {
-                Storage::delete('public/avatars/' . auth()->user()->image);
+                Storage::delete('avatars/' . auth()->user()->image);
 
                 $file = $request->file('image');
                 $filename = Str::random(10) . '_' . Str::slug($file->getClientOriginalName()) . '.' . $file->getClientOriginalExtension();
@@ -162,6 +164,8 @@ class VillaController extends Controller
             DB::beginTransaction();
 
             $user = User::find(auth()->user()->id);
+
+            // dd($validateData);
 
             $user->update($validateData);
 
@@ -271,7 +275,7 @@ class VillaController extends Controller
 
             DB::commit();
 
-            return redirect()->back()->with('success', 'Request sent successfully');
+            return redirect()->back()->with('success', 'Permintaan Staff berhasil dikirim');
         } catch (\Throwable $e) {
             DB::rollBack();
             return redirect()->back()->with('error', $e->getMessage());
@@ -293,7 +297,7 @@ class VillaController extends Controller
 
                 DB::commit();
 
-                return redirect()->back()->with('success', 'Request sent successfully');
+                return redirect()->back()->with('success', 'Permintaan Staff berhasil diterima');
             } catch (\Throwable $e) {
                 DB::rollBack();
                 return redirect()->back()->with('error', $e->getMessage());
@@ -310,7 +314,7 @@ class VillaController extends Controller
 
                 DB::commit();
 
-                return redirect()->back()->with('success', 'Request sent successfully');
+                return redirect()->back()->with('success', 'Permintaan Staff berhasil dikembalikan ke status pending');
             } catch (\Throwable $e) {
                 DB::rollBack();
                 return redirect()->back()->with('error', $e->getMessage());
@@ -327,7 +331,7 @@ class VillaController extends Controller
 
                 DB::commit();
 
-                return redirect()->back()->with('success', 'Request sent successfully');
+                return redirect()->back()->with('success', 'Permintaan Staff berhasil ditolak');
             } catch (\Throwable $e) {
                 DB::rollBack();
                 return redirect()->back()->with('error', $e->getMessage());
@@ -348,7 +352,7 @@ class VillaController extends Controller
 
                 DB::commit();
 
-                return redirect()->back()->with('success', 'Request sent successfully');
+                return redirect()->back()->with('success', 'Permintaan berhasil dibatalkan');
             } catch (\Throwable $e) {
                 DB::rollBack();
                 return redirect()->back()->with('error', $e->getMessage());
@@ -370,6 +374,115 @@ class VillaController extends Controller
         } catch (\Throwable $e) {
             // DB::rollBack();
             return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
+    public function manageContract()
+    {
+        $contracts = Contract::where('villa_id', auth()->user()->id)->get();
+
+        // Get all user staff that have accepted the request and user staff that request to join villa
+        $staffsRequest = RequestStaff::where('villa_id', auth()->user()->id)
+            ->where('status', 'accepted')
+            ->get();
+
+        $villaStaffsRequest = RequestVilla::where('user_id', auth()->user()->id)
+            ->where('status', 'accepted')
+            ->get();
+
+        // check if user staff have contract with villa
+        foreach ($staffsRequest as $staff) {
+            $checkContract = Contract::where('staff_id', $staff->user_id)
+                ->where('villa_id', $staff->villa_id)
+                ->first();
+
+            if ($checkContract) {
+                $staffsRequest = $staffsRequest->except($staff->id);
+                $villaStaffsRequest = $villaStaffsRequest->except($staff->id);
+            }
+        }
+
+        // check if villa have contract with user staff
+        foreach ($villaStaffsRequest as $staff) {
+            $checkContract = Contract::where('staff_id', $staff->staff_id)
+                ->where('villa_id', $staff->user_id)
+                ->first();
+
+            if ($checkContract) {
+                $villaStaffsRequest = $villaStaffsRequest->except($staff->id);
+                $staffsRequest = $staffsRequest->except($staff->id);
+            }
+        }
+
+        return view('villa.pages.manageContract', [
+            'title' => 'Manage Contract',
+            'active' => 'villa.manageContract',
+            'contracts' => $contracts,
+            'staffsRequest' => $staffsRequest,
+            'villaStaffsRequest' => $villaStaffsRequest
+        ]);
+    }
+
+    public function createContract(Request $request, User $user)
+    {
+
+        $validateData = $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'position' => 'required',
+            'start_date' => 'required|date|after_or_equal:today',
+            'end_date' => 'required|date|after_or_equal:start_date',
+            'signatures_villa' => 'required',
+
+            'price' => 'required|numeric',
+        ]);
+
+
+        if (password_verify($validateData['signatures_villa'], auth()->user()->password)) {
+            try {
+                DB::beginTransaction();
+
+                Contract::create([
+                    'title' => $request->title,
+                    'description' => $request->description,
+                    'position' => $request->position,
+                    'villa_id' => auth()->user()->id,
+                    'staff_id' => $user->id,
+                    'start_date' => $request->start_date,
+                    'end_date' => $request->end_date,
+                    'signatures_villa' => $request->signatures_villa,
+                    'status' => 'process',
+                ]);
+
+                $contract = Contract::where('villa_id', auth()->user()->id)
+                    ->where('staff_id', $user->id)
+                    ->where('status', 'process')
+                    ->orWhere('status', 'berjalan')
+                    ->first();
+
+                // dd($contract);
+                // get total_price + 5% from price
+                $total_price = $request->price + ($request->price * 0.05);
+
+                Transaction::create([
+                    'villa_id' => auth()->user()->id,
+                    'contract_id' => $contract->id,
+                    'code_transaction' => 'StaffSeekers-' . time(),
+                    'price' => $request->price,
+                    'total_price' => $total_price,
+                    'payment_status' => 'pending',
+                    'status' => 'process',
+                ]);
+
+                DB::commit();
+
+                return redirect()->back()->with('success', 'Kontrak berhasil dibuat');
+            } catch (\Throwable $e) {
+                DB::rollBack();
+                return redirect()->back()->with('error', $e->getMessage());
+            }
+        } else {
+            return redirect()->back()->with('error', 'Password villa salah');
         }
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Contract;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,10 +17,17 @@ class TransactionFactory extends Factory
      */
     public function definition()
     {
+        $contract = Contract::all()->pluck('id')->toArray();
+        $villa = Contract::all()->pluck('villa_id')->toArray();
+
         return [
-            'contract_id' => $this->faker->numberBetween(1, 10),
-            'code_transaction' => 'CodeTrans' . $this->faker->randomNumber(8),
-            'villa_id' => $this->faker->numberBetween(99, 103),
+            'villa_id' => fake()->randomElement($villa),
+            'contract_id' => fake()->randomElement($contract),
+            'code_transaction' => 'StaffSeekers-' . $this->faker->randomNumber(8),
+            'price' => $this->faker->numberBetween(100000, 1000000),
+            'total_price' => $this->faker->numberBetween(100000, 1000000),
+            'payment_status' => $this->faker->randomElement(['pending', 'valid', 'invalid']),
+            'status' => $this->faker->randomElement(['process', 'send', 'received', 'done']),
         ];
     }
 }

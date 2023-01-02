@@ -70,6 +70,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/dashboard/lowongan', [VillaController::class, 'lowongan'])->name('villa.lowongan');
         Route::get('/dashboard/pendaftar', [VillaController::class, 'pendaftar'])->name('villa.pendaftar');
         Route::get('/dashboard/permintaan', [VillaController::class, 'permintaanStaff'])->name('villa.permintaanStaff');
+        Route::get('/dashboard/manageContract', [VillaController::class, 'manageContract'])->name('villa.manageContract');
 
         // Action Route
         // Route::post('/dashboard/pendaftar/request/{user:username}', [VillaController::class, 'requestStaff'])->name('villa.requestStaff');
@@ -81,6 +82,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/dashboard/pendaftar/kelola/{user:username}', [VillaController::class, 'kelolaPendaftar'])->name('villa.kelolaPendaftar');
         Route::post('/dashboard/permintaan/kelola/{user:username}', [VillaController::class, 'kelolaPermintaan'])->name('villa.kelolaPermintaan');
         Route::post('/dashboard/pendaftar/cv/{user:username}', [VillaController::class, 'downloadCVStaff'])->name('villa.cvStaff');
+
+        // contract
+        Route::post('/dashboard/manageContract/create/{user:username}', [VillaController::class, 'createContract'])->name('villa.createContract');
     });
 
     // Group Admin Route
@@ -88,10 +92,14 @@ Route::group(['middleware' => 'auth'], function () {
         // View Route
         Route::get('/', [AdminController::class, 'index'])->name('admin.home');
         Route::get('/user', [AdminController::class, 'user'])->name('admin.user');
+        Route::get('/userReport', [AdminController::class, 'userReport'])->name('admin.userReports');
+        Route::get('/bug', [AdminController::class, 'bug'])->name('admin.bug');
 
         // Action Route
         Route::post('/user/delete/{user:username}', [AdminController::class, 'destroy'])->name('admin.user.destroy');
         Route::post('/user/edit/{user:username}', [AdminController::class, 'edit'])->name('admin.user.edit');
+        Route::post('/user/userReport/{report:slug}', [AdminController::class, 'reportProcess'])->name('admin.user.reportProcess');
+        Route::post('/user/bug/{bug:slug}', [AdminController::class, 'reportBug'])->name('admin.user.reportBug');
     });
 
     // Inactive User
