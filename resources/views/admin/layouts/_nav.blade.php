@@ -25,10 +25,10 @@
                 <a href="#" class="nav_link">
                     <i class='fa-solid fa-money-bill-transfer nav_icon'></i> <span class="nav_name">Transaction</span>
                 </a>
-                <a href="#" class="nav_link">
-                    <i class="fa-solid fa-file-contract nav_icon"></i><span class="nav_name">Contract</span>
+                <a href="{{ route('admin.bug') }}" class="nav_link">
+                    <i class="fa-solid fa-bullhorn nav_icon"></i><span class="nav_name">Bug Report</span>
                 </a>
-                <a href="#" class="nav_link">
+                <a href="{{ route('admin.userReports') }}" class="nav_link">
                     <i class='fa-solid fa-bullhorn nav_icon'></i> <span class="nav_name">User Report</span>
                 </a>
                 <a href="#" class="nav_link">

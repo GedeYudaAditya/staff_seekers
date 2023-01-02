@@ -91,10 +91,14 @@ Route::group(['middleware' => 'auth'], function () {
         // View Route
         Route::get('/', [AdminController::class, 'index'])->name('admin.home');
         Route::get('/user', [AdminController::class, 'user'])->name('admin.user');
+        Route::get('/userReport', [AdminController::class, 'userReport'])->name('admin.userReports');
+        Route::get('/bug', [AdminController::class, 'bug'])->name('admin.bug');
 
         // Action Route
         Route::post('/user/delete/{user:username}', [AdminController::class, 'destroy'])->name('admin.user.destroy');
         Route::post('/user/edit/{user:username}', [AdminController::class, 'edit'])->name('admin.user.edit');
+        Route::post('/user/userReport/{report:slug}', [AdminController::class, 'reportProcess'])->name('admin.user.reportProcess');
+        Route::post('/user/bug/{bug:slug}', [AdminController::class, 'reportBug'])->name('admin.user.reportBug');
     });
 
     // Inactive User
