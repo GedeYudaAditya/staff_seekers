@@ -21,6 +21,7 @@ class ReportFactory extends Factory
         $dataId = User::where('role', 'staff')->orWhere('role', 'villa')->pluck('id')->toArray();
 
         return [
+            'slug' => $this->faker->slug(),
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
             'status' => $this->faker->randomElement(['pending', 'processed', 'done']),
