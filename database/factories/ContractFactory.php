@@ -19,15 +19,13 @@ class ContractFactory extends Factory
         return [
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
-            'status' => $this->faker->randomElement(['pending', 'accepted', 'rejected']),
+            'status' => $this->faker->randomElement(['process', 'berjalan', 'selesai', 'batal']),
             'staff_id' => $this->faker->numberBetween(99, 103),
             'villa_id' => $this->faker->numberBetween(99, 103),
             'start_date' => $this->faker->date,
             'end_date' => $this->faker->date,
-            'total_price' => $this->faker->randomFloat(2, 100, 1000),
             'signatures_staff' => $this->faker->boolean,
             'signatures_villa' => $this->faker->boolean,
-            'payment_status' => $this->faker->randomElement(['pending', 'paid']),
         ];
     }
 }

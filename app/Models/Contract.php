@@ -17,10 +17,8 @@ class Contract extends Model
         'villa_id',
         'start_date',
         'end_date',
-        'total_price',
         'signatures_staff',
         'signatures_villa',
-        'payment_status',
     ];
 
     public function staff()
@@ -35,6 +33,6 @@ class Contract extends Model
 
     public function transactions()
     {
-        return $this->hasMany(Transaction::class);
+        return $this->hasOne(Transaction::class);
     }
 }

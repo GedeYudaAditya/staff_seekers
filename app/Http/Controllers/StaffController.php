@@ -95,7 +95,7 @@ class StaffController extends Controller
             $validateData = $request->validate($role);
 
             if ($request->hasFile('cv')) {
-                Storage::delete('public/cv/' . auth()->user()->cv);
+                Storage::delete('cv/' . auth()->user()->cv);
 
                 $file = $request->file('cv');
                 $filename = Str::random(10) . '_' . Str::slug($file->getClientOriginalName()) . '.' . $file->getClientOriginalExtension();
@@ -107,7 +107,7 @@ class StaffController extends Controller
             }
 
             if ($request->hasFile('image')) {
-                Storage::delete('public/avatars/' . auth()->user()->image);
+                Storage::delete('avatars/' . auth()->user()->image);
 
                 $file = $request->file('image');
                 $filename = Str::random(10) . '_' . Str::slug($file->getClientOriginalName()) . '.' . $file->getClientOriginalExtension();
