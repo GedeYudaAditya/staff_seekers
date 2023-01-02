@@ -44,18 +44,26 @@
                                     <td>
                                         {{ $contract->end_date }}
                                     </td>
-                                    <td>
+                                    <td colspan="0">
                                         {{-- {{ route('staff.contractdetail', $contract->id) }}
                                         {{ route('staff.contractcancle', $contract->id) }} --}}
-                                        <a href="" class="btn btn-sm btn-primary"><i class="fa fa-info"
-                                                aria-hidden="true"></i></a>
-                                        @if ($contract->status == 'pending')
+                                        {{-- <a href="" class="btn btn-sm btn-primary"><i class="fa fa-info"
+                                                aria-hidden="true"></i></a> --}}
+                                        {{-- @if ($contract->status == 'pending')
                                         <a href="" class="btn btn-sm btn-danger"><i class="fa fa-minus"
                                                 aria-hidden="true"></i></a>
                                         @else
                                         <button disabled class="btn btn-sm btn-secondary"><i class="fa fa-minus"
                                                 aria-hidden="true"></i></button>
-                                        @endif
+                                        @endif --}}
+                                        <a class="btn btn-sm btn-success"><i class="fa fa-check"
+                                                aria-hidden="true"></i></a>
+                                        <form action="{{ route('staff.declineContract', $contract->id) }}" method="post"
+                                            class="d-inline">
+                                            @csrf
+                                            <button class="btn btn-sm btn-danger"><i class="fa fa-minus"
+                                                    aria-hidden="true"></i></button>
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach

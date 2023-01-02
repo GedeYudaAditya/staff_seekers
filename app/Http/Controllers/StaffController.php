@@ -217,4 +217,12 @@ class StaffController extends Controller
             'contracts' => $contracts
         ]);
     }
+
+    public function declineContract()
+    {
+        $contract = Contract::find(request()->id);
+        dd($contract);
+        // $contract->save();
+        // return redirect()->back()->with('success', 'Contract declined successfully');
+    }
 }
