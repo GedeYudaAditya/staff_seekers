@@ -81,6 +81,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/dashboard/pendaftar/kelola/{user:username}', [VillaController::class, 'kelolaPendaftar'])->name('villa.kelolaPendaftar');
         Route::post('/dashboard/permintaan/kelola/{user:username}', [VillaController::class, 'kelolaPermintaan'])->name('villa.kelolaPermintaan');
         Route::post('/dashboard/pendaftar/cv/{user:username}', [VillaController::class, 'downloadCVStaff'])->name('villa.cvStaff');
+
+        // contract
+        Route::post('/dashboard/manageContract/create/{user:username}', [VillaController::class, 'createContract'])->name('villa.createContract');
     });
 
     // Group Admin Route

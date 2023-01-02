@@ -78,8 +78,8 @@ class DatabaseSeeder extends Seeder
 
         Report::factory(100)->create();
 
-        Contract::factory(10)->create();
+        Contract::factory(30)->create();
 
-        Transaction::factory(10)->create();
+        Transaction::factory(30)->create();
     }
 }
