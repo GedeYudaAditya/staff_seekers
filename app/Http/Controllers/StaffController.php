@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\RequestStaff;
 use App\Models\RequestVilla;
 use App\Models\User;
+use App\Models\Contract;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Http\Request;
@@ -204,6 +205,16 @@ class StaffController extends Controller
             'title' => 'Received Job List',
             'active' => 'staff.received-job-list',
             'jobs' => $receivedJobs
+        ]);
+    }
+
+    public function contractList()
+    {
+        $contracts = Contract::where('staff_id', auth()->user()->id)->get();
+        return view('staff.pages.contractlist', [
+            'title' => 'Contract List',
+            'active' => 'staff.contract-list',
+            'contracts' => $contracts
         ]);
     }
 }
