@@ -12,7 +12,7 @@
             </div>
             <div class="row justify-content-center mt-3 ">
                 <div class="col-md-6 px-2">
-                    <a href="{{ route('villa.lowongan') }}" class="text-decoration-none text-dark">
+                    <a href="{{ route('villa.permintaanStaff') }}" class="text-decoration-none text-dark">
                         <div class="py-2 text-center bg-light rounded px-4 shadow border">
                             <h4>Requested Staff</h4>
                             <div
@@ -25,7 +25,7 @@
                     </a>
                 </div>
                 <div class="col-md-6 px-2">
-                    <a href="" class="text-decoration-none text-dark">
+                    <a href="{{ route('villa.pendaftar') }}" class="text-decoration-none text-dark">
                         <div class="py-2 text-center bg-light rounded px-4 shadow border">
                             <h4>Received Staff</h4>
                             <div

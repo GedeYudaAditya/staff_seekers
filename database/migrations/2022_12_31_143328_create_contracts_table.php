@@ -18,12 +18,13 @@ return new class extends Migration
             $table->string('title');
             $table->longText('description');
             $table->enum('status', ['process', 'berjalan', 'selesai', 'batal']);
+            $table->string('position');
             $table->foreignId('staff_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('villa_id')->constrained('users')->onDelete('cascade');
             $table->string('start_date');
             $table->string('end_date');
-            $table->string('signatures_staff');
-            $table->string('signatures_villa');
+            $table->string('signatures_staff')->nullable();
+            $table->string('signatures_villa')->nullable();
             $table->timestamps();
         });
     }
