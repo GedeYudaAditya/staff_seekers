@@ -21,6 +21,7 @@ class TransactionFactory extends Factory
         $villa = Contract::all()->pluck('villa_id')->toArray();
 
         return [
+            'slug' => $this->faker->slug(),
             'villa_id' => fake()->randomElement($villa),
             'contract_id' => fake()->randomElement($contract),
             'code_transaction' => 'StaffSeekers-' . $this->faker->randomNumber(8),
