@@ -29,13 +29,27 @@
                                     <td>{{ $contract->villa->address }}</td>
                                     {{-- <td>{{ $contract->villa->salary }}</td> --}}
                                     <td>
-                                        @if ($contract->status == 'pending')
+                                        @switch($contract->status)
+                                        @case('selesai')
+                                        <span class="badge bg-success py-2">Selesai</span>
+                                        @break
+                                        @case('proses')
+                                        <span class="badge bg-warning py-2">Pending</span>
+                                        @break
+                                        @case('berjalan')
+                                        <span class="badge bg-secondary py-2">Berjalan</span>
+                                        @break
+                                        @case('batal')
+                                        <span class="badge bg-danger py-2">Batal</span>
+                                        @break
+                                        @endswitch
+                                        {{-- @if ($contract->status == 'selesai')
                                         <span class="badge bg-secondary py-2">Pending</span>
-                                        @elseif($contract->status == 'accepted')
+                                        @elseif($contract->status == '')
                                         <span class="badge bg-success py-2">Accepted</span>
                                         @else
                                         <span class="badge bg-danger py-2">Rejected</span>
-                                        @endif
+                                        @endif --}}
                                     </td>
                                     <td>
                                         {{ $contract->start_date }}
@@ -55,8 +69,15 @@
                                         <button disabled class="btn btn-sm btn-secondary"><i class="fa fa-minus"
                                                 aria-hidden="true"></i></button>
                                         @endif --}}
-                                        <a class="btn btn-sm btn-success"><i class="fa fa-check"
-                                                aria-hidden="true"></i></a>
+
+                                        {{-- <a class="btn btn-sm btn-success"><i class="fa fa-check"
+                                                aria-hidden="true"></i></a> --}}
+                                        <form action="{{ route('staff.acceptContract', $contract->id) }}" method="post"
+                                            class="d-inline">
+                                            @csrf
+                                            <button class="btn btn-sm btn-success"><i class="fa fa-check"
+                                                    aria-hidden="true"></i></button>
+                                        </form>
                                         <form action="{{ route('staff.declineContract', $contract->id) }}" method="post"
                                             class="d-inline">
                                             @csrf
