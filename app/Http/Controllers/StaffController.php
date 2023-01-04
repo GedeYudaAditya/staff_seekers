@@ -217,4 +217,36 @@ class StaffController extends Controller
             'contracts' => $contracts
         ]);
     }
+
+    public function acceptContract()
+    {
+        $contract = Contract::find(request()->id);
+        // dd($contract);
+        try {
+            Contract::where('id', $contract->id)->update([
+                'status' => 'selesai'
+            ]);
+
+            return redirect()->back()->with('success', 'Contract accepted successfully');
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
+    public function declineContract()
+    {
+        $contract = Contract::find(request()->id);
+
+        try {
+            Contract::where('id', $contract->id)->update([
+                'status' => 'batal'
+            ]);
+
+            return redirect()->back()->with('success', 'Contract declined successfully');
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
 }

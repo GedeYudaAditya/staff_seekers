@@ -54,6 +54,8 @@ Route::group(['middleware' => 'auth'], function () {
         // Action Route
         Route::post('/request/{user:username}', [StaffController::class, 'requestJob'])->name('staff.requestJob');
         Route::post('/updateProfile', [StaffController::class, 'updateProfile'])->name('staff.updateProfil');
+        Route::post('/manage/contractList/decline/{id}', [StaffController::class, 'declineContract'])->name('staff.declineContract');
+        Route::post('/manage/contractList/accept/{id}', [StaffController::class, 'acceptContract'])->name('staff.acceptContract');
     });
 
 
