@@ -19,8 +19,8 @@
                         Staff</a>
                 </li>
                 <li class="nav-item me-4">
-                    <a class="nav-link {{ Request::is('villa/about') ? 'active' : '' }}"
-                        href="{{ route('villa.about') }}">About</a>
+                    <a class="nav-link {{ Request::is('/about') ? 'active' : '' }}"
+                        href="{{ route('about') }}">About</a>
                 </li>
             </ul>
             {{-- <form class="d-flex" role="search">
@@ -28,19 +28,21 @@
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form> --}}
             @auth
-            <div class="btn-lg">
-                <form action="{{ route('signout') }}" method="POST">
-                    <a href={{ route('villa.dashboard') }} class="btn btn-outline-danger me-2">Manage</a>
-                    @csrf
-                    <button type="submit" class="btn btn-danger"><i class="fa-solid fa-arrow-right-from-bracket"></i>
-                        Logout</button>
-                </form>
-            </div>
+                <img src="{{ auth()->user()->image != 'default.png' ? asset('/storage/avatars/' . auth()->user()->image) : asset('/img/avatars/' . auth()->user()->image) }}"
+                    class="img-fluid rounded-circle col-12 p-0 me-3" style="height:40px; width: 40px;" alt="">
+                <div class="btn-lg">
+                    <form action="{{ route('signout') }}" method="POST">
+                        <a href={{ route('villa.dashboard') }} class="btn btn-outline-danger me-2">Manage</a>
+                        @csrf
+                        <button type="submit" class="btn btn-danger"><i class="fa-solid fa-arrow-right-from-bracket"></i>
+                            Logout</button>
+                    </form>
+                </div>
             @else
-            <div class="btn-lg">
-                <a href="{{ route('Auth') }}" class="btn btn-outline-danger me-2">Sign In</a>
-                <a href="{{ route('register') }}" class="btn btn-danger">Sign Up</a>
-            </div>
+                <div class="btn-lg">
+                    <a href="{{ route('Auth') }}" class="btn btn-outline-danger me-2">Sign In</a>
+                    <a href="{{ route('register') }}" class="btn btn-danger">Sign Up</a>
+                </div>
             @endauth
         </div>
     </div>

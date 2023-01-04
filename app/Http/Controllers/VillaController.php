@@ -77,14 +77,6 @@ class VillaController extends Controller
         ]);
     }
 
-    public function about()
-    {
-        return view('villa.pages.about', [
-            'title' => 'About',
-            'active' => 'villa.about'
-        ]);
-    }
-
     public function dashboard()
     {
         return view('villa.pages.dashboard', [
@@ -483,6 +475,77 @@ class VillaController extends Controller
             }
         } else {
             return redirect()->back()->with('error', 'Password villa salah');
+        }
+    }
+
+    public function processContract(Request $request, Contract $contract)
+    {
+        $validateData = $request->validate([
+            'confirm' => 'required',
+        ]);
+
+        // dd($contract->id);
+
+        if ($validateData['confirm'] == 'cencel') {
+            try {
+                DB::beginTransaction();
+
+                $contract->update([
+                    'status' => 'cencel',
+                ]);
+
+                DB::commit();
+
+                return redirect()->back()->with('success', 'Kontrak berhasil dibatalkan');
+            } catch (\Throwable $e) {
+                DB::rollBack();
+                return redirect()->back()->with('error', $e->getMessage());
+            }
+        } else if ($validateData['confirm'] == 'finish') {
+            try {
+                DB::beginTransaction();
+
+                $contract->update([
+                    'status' => 'selesai',
+                ]);
+
+                DB::commit();
+
+                return redirect()->back()->with('success', 'Kontrak berhasil diselesaikan');
+            } catch (\Throwable $e) {
+                DB::rollBack();
+                return redirect()->back()->with('error', $e->getMessage());
+            }
+        } else if ($validateData['confirm'] == 'delete') {
+            try {
+                DB::beginTransaction();
+
+                $contract->delete();
+
+                DB::commit();
+
+                return redirect()->back()->with('success', 'Kontrak berhasil dihapus');
+            } catch (\Throwable $e) {
+                DB::rollBack();
+                return redirect()->back()->with('error', $e->getMessage());
+            }
+        } else if ($validateData['confirm'] == 'perpanjang') {
+            try {
+                DB::beginTransaction();
+
+                $contract->update([
+                    'status' => 'process',
+                ]);
+
+                DB::commit();
+
+                return redirect()->back()->with('success', 'Kontrak berhasil diperpanjang');
+            } catch (\Throwable $e) {
+                DB::rollBack();
+                return redirect()->back()->with('error', $e->getMessage());
+            }
+        } else {
+            return redirect()->back()->with('error', 'Terjadi kesalahan');
         }
     }
 }

@@ -22,4 +22,12 @@ class GuestController extends Controller
             'active' => 'inactive'
         ]);
     }
+
+    public function about()
+    {
+        return view('about', [
+            'title' => 'About',
+            'active' => 'villa.about'
+        ]);
+    }
 }

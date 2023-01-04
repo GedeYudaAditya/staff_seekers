@@ -21,9 +21,11 @@ class Transaction extends Model
 
     public function contract()
     {
+        // define one to one relationship to Contract model
         return $this->belongsTo(Contract::class);
     }
-    public function villa(){
+    public function villa()
+    {
         return $this->belongsTo(User::class);
     }
 }

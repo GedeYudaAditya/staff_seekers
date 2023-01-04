@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Route;
 
 
 // Not authenticated user group
+Route::get('/about', [GuestController::class, 'about'])->name('about');
+
 Route::group(['middleware' => 'guest'], function () {
     // View Route
     Route::get('/', [GuestController::class, 'index'])->name('home');
@@ -54,6 +56,9 @@ Route::group(['middleware' => 'auth'], function () {
         // Action Route
         Route::post('/request/{user:username}', [StaffController::class, 'requestJob'])->name('staff.requestJob');
         Route::post('/updateProfile', [StaffController::class, 'updateProfile'])->name('staff.updateProfil');
+        Route::post('/manage/listRequestedJob/cencel/{request:id}', [StaffController::class, 'cencelRequestedJob'])->name('staff.cencelRequestedJob');
+        Route::post('/manage/listReceivedJob/accept/{request:id}', [StaffController::class, 'acceptJob'])->name('staff.acceptReceivedJob');
+        Route::post('/manage/listReceivedJob/decline/{request:id}', [StaffController::class, 'rejectReceivedJob'])->name('staff.declineReceivedJob');
         Route::post('/manage/contractList/decline/{id}', [StaffController::class, 'declineContract'])->name('staff.declineContract');
         Route::post('/manage/contractList/accept/{id}', [StaffController::class, 'acceptContract'])->name('staff.acceptContract');
     });
@@ -65,7 +70,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/', [VillaController::class, 'index'])->name('villa.home');
         Route::get('/find-staff', [VillaController::class, 'findStaff'])->name('villa.find-staff');
         Route::get('/find-staff/{user:username}', [VillaController::class, 'detailStaff'])->name('villa.find-staff.detail');
-        Route::get('/about', [VillaController::class, 'about'])->name('villa.about');
+        // Route::get('/about', [VillaController::class, 'about'])->name('villa.about');
         Route::get('/dashboard', [VillaController::class, 'dashboard'])->name('villa.dashboard');
         Route::get('/dashboard/profile', [VillaController::class, 'profile'])->name('villa.profile');
         Route::get('/dashboard/lowongan', [VillaController::class, 'lowongan'])->name('villa.lowongan');
@@ -86,6 +91,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         // contract
         Route::post('/dashboard/manageContract/create/{user:username}', [VillaController::class, 'createContract'])->name('villa.createContract');
+        Route::post('/dashboard/manageContract/process/{contract:id}', [VillaController::class, 'processContract'])->name('villa.processContract');
     });
 
     // Group Admin Route
