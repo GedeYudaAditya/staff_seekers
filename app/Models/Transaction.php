@@ -23,4 +23,7 @@ class Transaction extends Model
     {
         return $this->belongsTo(Contract::class);
     }
+    public function villa(){
+        return $this->belongsTo(User::class);
+    }
 }
