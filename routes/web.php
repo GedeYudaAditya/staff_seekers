@@ -93,12 +93,14 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/user', [AdminController::class, 'user'])->name('admin.user');
         Route::get('/userReport', [AdminController::class, 'userReport'])->name('admin.userReports');
         Route::get('/bug', [AdminController::class, 'bug'])->name('admin.bug');
+        Route::get('/transaction', [AdminController::class, 'transaction'])->name('admin.transaction');
 
         // Action Route
         Route::post('/user/delete/{user:username}', [AdminController::class, 'destroy'])->name('admin.user.destroy');
         Route::post('/user/edit/{user:username}', [AdminController::class, 'edit'])->name('admin.user.edit');
         Route::post('/user/userReport/{report:slug}', [AdminController::class, 'reportProcess'])->name('admin.user.reportProcess');
         Route::post('/user/bug/{bug:slug}', [AdminController::class, 'reportBug'])->name('admin.user.reportBug');
+        Route::post('/user/transaction/{transaction:slug}', [AdminController::class, 'transactionProcess'])->name('admin.user.transactionProccess');
     });
 
     // Inactive User
