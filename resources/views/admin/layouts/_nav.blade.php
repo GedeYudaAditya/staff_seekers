@@ -22,7 +22,7 @@
                 <a href="{{ route('admin.user') }}" class="nav_link {{ Route::is('admin.user') ? 'active' : '' }}">
                     <i class='fa-solid fa-users nav_icon'></i> <span class="nav_name">Users</span>
                 </a>
-                <a href="#" class="nav_link">
+                <a href="{{route('admin.transaction')}}" class="nav_link">
                     <i class='fa-solid fa-money-bill-transfer nav_icon'></i> <span class="nav_name">Transaction</span>
                 </a>
                 <a href="{{ route('admin.bug') }}" class="nav_link">

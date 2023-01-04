@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Report;
+use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -95,6 +96,39 @@ class AdminController extends Controller
             return back()->with('error','cannot update data');
 
         }
+
+    }
+
+    public function transaction(){
+        
+        $transaction = Transaction::all();
+        return view('admin.pages.transaction', [
+            'title' => 'Transaction',
+            'active' => 'transaction',
+            
+            'transaction' => $transaction
+        ]);
+    }
+    public function transactionProcess(Request $request, Report $report){
+        $validateData = $request->validate(
+            [
+                'status'=>'required'
+            ]
+        );
+        DB::beginTransaction();
+        try {
+            //code...
+            Report::where('id',$report->id)->update($validateData);
+            DB::commit();
+            return back()->with('success','data updated successfully');
+
+        } catch (\Throwable $th) {
+            //throw $th;
+            DB::rollBack();
+            return back()->with('error','cannot update data');
+
+        }
+        
 
     }
 
