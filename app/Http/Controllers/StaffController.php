@@ -198,6 +198,18 @@ class StaffController extends Controller
         ]);
     }
 
+    public function cencelRequestedJob(RequestStaff $request)
+    {
+        try {
+            $request = RequestStaff::find($request->id);
+            $request->delete();
+
+            return redirect()->back()->with('success', 'Request canceled successfully');
+        } catch (\Throwable $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
     public function receivedJobList()
     {
         $receivedJobs = RequestVilla::where('staff_id', auth()->user()->id)->get();
@@ -206,6 +218,35 @@ class StaffController extends Controller
             'active' => 'staff.received-job-list',
             'jobs' => $receivedJobs
         ]);
+    }
+
+    public function acceptJob(RequestVilla $request)
+    {
+        // dd($request);
+        try {
+            $request = RequestVilla::find($request->id);
+            $request->update([
+                'status' => 'accepted'
+            ]);
+
+            return redirect()->back()->with('success', 'Job accepted successfully');
+        } catch (\Throwable $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
+    public function rejectReceivedJob(RequestVilla $request)
+    {
+        try {
+            $request = RequestVilla::find($request->id);
+            $request->update([
+                'status' => 'rejected'
+            ]);
+
+            return redirect()->back()->with('success', 'Job reject successfully');
+        } catch (\Throwable $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     public function contractList()
@@ -224,7 +265,7 @@ class StaffController extends Controller
         // dd($contract);
         try {
             Contract::where('id', $contract->id)->update([
-                'status' => 'selesai'
+                'status' => 'berjalan'
             ]);
 
             return redirect()->back()->with('success', 'Contract accepted successfully');
@@ -236,7 +277,7 @@ class StaffController extends Controller
 
     public function declineContract()
     {
-        $contract = Contract::find(request()->id);
+        $contract = Contract::with('transaction')->find(request()->id);
 
         try {
             Contract::where('id', $contract->id)->update([

@@ -62,7 +62,9 @@
                                                         data-bs-target="#exampleModal{{ $item->id }}"
                                                         class="btn btn-warning btn-sm">Buat
                                                         Kontrak</button>
-                                                    <button type="submit" class="btn btn-success btn-sm">Hubungi</button>
+                                                    <a target="blank"
+                                                        href="https://wa.me/{{ $item->user->phone }}?text=Halo%20{{ $item->user->name }},%20Saya%20{{ $item->villa->name }}%20dari%20villa%20{{ $item->villa->villa_name }}"
+                                                        class="btn btn-success btn-sm">Hubungi</a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -213,7 +215,9 @@
                                                         data-bs-target="#example2Modal{{ $item->id }}"
                                                         class="btn btn-warning btn-sm">Buat
                                                         Kontrak</button>
-                                                    <button type="submit" class="btn btn-success btn-sm">Hubungi</button>
+                                                    <a target="blank"
+                                                        href="https://wa.me/{{ $item->staff->phone }}?text=Halo%20{{ $item->staff->name }},%20Saya%20{{ $item->user->name }}%20dari%20villa%20{{ $item->user->villa_name }}"
+                                                        class="btn btn-success btn-sm">Hubungi</a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -355,7 +359,7 @@
                                             <td>{{ $item->staff->name }}</td>
                                             <td>
                                                 @if ($item->status == 'process')
-                                                    <span class="badge bg-secondary"><i class="fa fa-times-circle"
+                                                    <span class="badge bg-secondary"><i class="fa fa-hourglass"
                                                             aria-hidden="true"></i></span>
                                                 @elseif($item->status == 'berjalan')
                                                     <span class="badge bg-warning"><i class="fa fa-play-circle"
@@ -369,14 +373,42 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <div class="btn-group" role="group"
-                                                    aria-label="Basic mixed styles example">
-                                                    <button type="submit" class="btn btn-danger btn-sm">
-                                                        <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                                    </button>
-                                                    <button type="submit" class="btn btn-success btn-sm"><i
-                                                            class="fa fa-whatsapp" aria-hidden="true"></i></button>
-                                                </div>
+                                                <form action="{{ route('villa.processContract', $item->id) }}"
+                                                    onsubmit="return confirm('Apakah anda yakin?')" method="post">
+                                                    @csrf
+                                                    <div class="btn-group" role="group"
+                                                        aria-label="Basic mixed styles example">
+                                                        @if ($item->status == 'process')
+                                                            <button type="submit" value="delete" name="confirm"
+                                                                class="btn btn-danger btn-sm">
+                                                                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                                            </button>
+                                                        @elseif($item->status == 'berjalan')
+                                                            <button type="submit" value="finish" name="confirm"
+                                                                class="btn btn-warning btn-sm">
+                                                                <i class="fa fa-stop-circle" aria-hidden="true"></i>
+                                                            </button>
+                                                        @elseif($item->status == 'batal')
+                                                            <button type="submit" value="delete" name="confirm"
+                                                                class="btn btn-danger btn-sm">
+                                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                                            </button>
+                                                        @elseif($item->status == 'selesai')
+                                                            <button type="submit" value="delete" name="confirm"
+                                                                class="btn btn-danger btn-sm">
+                                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                                            </button>
+                                                            <button type="submit" value="perpanjang" name="confirm"
+                                                                class="btn btn-info btn-sm">
+                                                                <i class="fa fa-step-forward" aria-hidden="true"></i>
+                                                            </button>
+                                                        @endif
+                                                        <a target="blank"
+                                                            href="https://wa.me/{{ $item->staff->phone }}?text=Halo%20{{ $item->staff->name }},%20Saya%20{{ $item->villa->name }}%20menerima%20anda%20dalam%20bekerja%20di%20{{ $item->villa->villa_name }}"
+                                                            class="btn btn-success btn-sm"><i class="fa fa-whatsapp"
+                                                                aria-hidden="true"></i></a>
+                                                    </div>
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach

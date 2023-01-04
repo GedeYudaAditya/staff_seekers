@@ -32,8 +32,9 @@ class Contract extends Model
         return $this->belongsTo(User::class, 'villa_id');
     }
 
-    public function transactions()
+    public function transaction()
     {
+        // define one to one relationship to Transaction model
         return $this->hasOne(Transaction::class);
     }
 }

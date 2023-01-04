@@ -15,7 +15,7 @@
                 </li>
 
                 <li class="nav-item me-4">
-                    <a class="nav-link" href="#">About</a>
+                    <a class="nav-link {{ Request::is('/about') ? 'active' : '' }}" href="{{ route('about') }}">About</a>
                 </li>
             </ul>
             {{-- <form class="d-flex" role="search">
