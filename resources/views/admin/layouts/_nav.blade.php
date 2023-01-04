@@ -33,9 +33,9 @@
                 <a href="{{ route('admin.userReports') }}" class="nav_link">
                     <i class='fa-solid fa-bullhorn nav_icon'></i> <span class="nav_name">User Report</span>
                 </a>
-                <a href="#" class="nav_link">
+                {{-- <a href="#" class="nav_link">
                     <i class='fa-solid fa-file nav_icon'></i> <span class="nav_name">Export data</span>
-                </a>
+                </a> --}}
             </div>
         </div>
         <form action="{{ route('signout') }}" method="POST">

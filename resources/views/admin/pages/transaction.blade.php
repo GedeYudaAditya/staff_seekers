@@ -29,7 +29,7 @@
                                         <th>Kode Transaksi</th>
                                         <th>id kontrak</th>
                                         <th>Pemilik Villa</th>
-                                    
+
                                         <th>Jumlah Bayar</th>
                                         <th>Status Pembayaran</th>
                                         <th>Status Proses</th>
@@ -42,9 +42,9 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $item->created_at }}</td>
                                             <td>{{ $item->code_transaction }}</td>
-                                            <td>{{ $item->contract->contract_id}}</td>
-                                            <td>{{ $item->villa->villa_name}}</td>
-                                            <td>{{ $item->total_price}}</td>
+                                            <td>{{ $item->contract->id }}</td>
+                                            <td>{{ $item->villa->villa_name }}</td>
+                                            <td>{{ $item->total_price }}</td>
                                             <td>
                                                 @if ($item->payment_status == 'pending')
                                                     <span class="badge bg-warning">pending</span>
@@ -66,34 +66,49 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <button data-bs-toggle="modal" data-bs-target="#exampleModal{{$item->slug}}"
+                                                <button data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModal{{ $item->slug }}"
                                                     class="btn btn-sm btn-warning">Edit</button>
                                             </td>
                                         </tr>
-                                        <div class="modal fade" id="exampleModal{{$item->slug}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                        <div class="modal fade" id="exampleModal{{ $item->slug }}"
+                                            data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                            aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                             <div class="modal-dialog">
-                                              <div class="modal-content">
-                                                <div class="modal-header">
-                                                  <h5 class="modal-title" id="staticBackdropLabel">Detail Transaksi</h5>
-                                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <form action="{{route('admin.user.transactionProccess',$item->slug)}}" method="POST">
-                                                    @csrf
-                                                    <div class="modal-body">
-                                                    <div class="form-floating">
-                                                        <input class="form-control" type="text" placeholder="{{$item->total_price}}" readonly>
-                                                        <label for="floatingTextarea2">Jumlah Pembayaran</label>
-                                                      </div>
-                                                    <div class="mb-3">
-                                                        <label for="status" class="form-label">Status</label>
-                                                        <select class="form-select" name="status" id="status">
-                                                            <option disabled>-- Status Pembayaran --</option>
-                                                            <option {{$item->payment_status == 'pending' ? 'selected' : ''}} value="pending">pending</option>
-                                                            <option {{$item->payment_status == 'invalid' ? 'selected' : ''}} value="invalid">invalid</option>
-                                                            <option {{$item->payment_status == 'valid' ? 'selected' : ''}} value="valid">valid</option>
-                                                        </select>
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="staticBackdropLabel">Detail Transaksi
+                                                        </h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
                                                     </div>
-                                                    {{-- <div class="mb-3">
+                                                    <form
+                                                        action="{{ route('admin.user.transactionProccess', $item->slug) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        <div class="modal-body">
+                                                            <div class="form-floating">
+                                                                <input class="form-control" type="text"
+                                                                    placeholder="Kosong"
+                                                                    value="Rp. {{ $item->total_price }}" readonly>
+                                                                <label for="floatingTextarea2">Jumlah Pembayaran</label>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="status" class="form-label">Status</label>
+                                                                <select class="form-select" name="status" id="status">
+                                                                    <option disabled>-- Status Pembayaran --</option>
+                                                                    <option
+                                                                        {{ $item->payment_status == 'pending' ? 'selected' : '' }}
+                                                                        value="pending">pending</option>
+                                                                    <option
+                                                                        {{ $item->payment_status == 'invalid' ? 'selected' : '' }}
+                                                                        value="invalid">invalid</option>
+                                                                    <option
+                                                                        {{ $item->payment_status == 'valid' ? 'selected' : '' }}
+                                                                        value="valid">valid</option>
+                                                                </select>
+                                                            </div>
+                                                            {{-- <div class="mb-3">
                                                         <label for="status" class="form-label">Status</label>
                                                         <select class="form-select" name="status" id="status">
                                                             <option disabled>-- Status Proses --</option>
@@ -103,15 +118,17 @@
                                                             <option {{$item->status == 'done' ? 'selected' : ''}} value="valid">done</option>
                                                         </select>
                                                     </div> --}}
-                                                </div> 
-                                                <div class="modal-footer">
-                                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                  <button type="submit" class="btn btn-primary">Save</button>
-                                                </div></form>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-primary">Save</button>
+                                                        </div>
+                                                    </form>
 
-                                              </div>
+                                                </div>
                                             </div>
-                                          </div>
+                                        </div>
                                     @endforeach
                                 </tbody>
                             </table>
