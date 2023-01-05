@@ -40,7 +40,7 @@ class VillaController extends Controller
                 ->where('status', 'active')
                 ->get();
         } else {
-            $staff = User::where('role', 'villa')
+            $staff = User::where('role', 'staff')
                 ->where(function (Builder $query) {
                     $request = request();
                     return $query->where('name', 'like', '%' . $request->search . '%')

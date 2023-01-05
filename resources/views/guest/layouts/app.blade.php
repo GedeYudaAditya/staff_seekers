@@ -9,12 +9,14 @@
     @include('guest.layouts._css')
 </head>
 
-<body>
+<body class="pb-0">
     @include('guest.layouts._nav')
 
     <div class="container-fluid p-0">
         @yield('content')
     </div>
+
+    @include('__footer')
 
     @include('guest.layouts._js')
 </body>
