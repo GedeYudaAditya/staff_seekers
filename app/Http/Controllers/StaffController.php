@@ -75,6 +75,7 @@ class StaffController extends Controller
             'address' => 'required',
             'image' => 'mimes:jpg,jpeg,png|max:2048',
             'cv' => 'required|mimes:pdf,doc,docx|max:2048',
+            'no_rek' => 'required'
         ];
 
         try {

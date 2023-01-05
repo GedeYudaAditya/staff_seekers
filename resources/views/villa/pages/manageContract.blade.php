@@ -83,7 +83,7 @@
                                                     </div>
                                                     <form
                                                         action="{{ route('villa.createContract', $item->user->username) }}"
-                                                        method="POST">
+                                                        method="POST" enctype="multipart/form-data">
                                                         <div class="modal-body">
                                                             @csrf
                                                             <div class="mb-3">
@@ -121,17 +121,27 @@
                                                                     <option value="4">Security</option>
                                                                     <option value="5">Driver</option>
                                                                     <option value="6">Pengemudi</option>
-                                                                    <option value="7">Pengawas</option>
-                                                                    <option value="8">Pengawas</option>
-                                                                    <option value="9">Pengawas</option>
-                                                                    <option value="10">Pengawas</option>
                                                                 </select>
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label for="message-text"
-                                                                    class="col-form-label">Gaji:</label>
+                                                                    class="col-form-label">Rekening:</label>
+                                                                <input disabled type="text"
+                                                                    value="{{ $item->user->no_rek }}"
+                                                                    class="form-control" name="price">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="message-text" class="col-form-label">Uang
+                                                                    Muka:</label>
                                                                 <input type="number" class="form-control"
                                                                     name="price">
+                                                            </div>
+                                                            {{-- bukti bayar --}}
+                                                            <div class="mb-3">
+                                                                <label for="message-text" class="col-form-label">Bukti
+                                                                    Pembayaran:</label>
+                                                                <input type="file" class="form-control"
+                                                                    name="bukti_pembayaran">
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label for="message-text" class="col-form-label">Tanggal
@@ -276,16 +286,27 @@
                                                                     <option value="5">Driver</option>
                                                                     <option value="6">Pengemudi</option>
                                                                     <option value="7">Pengawas</option>
-                                                                    <option value="8">Pengawas</option>
-                                                                    <option value="9">Pengawas</option>
-                                                                    <option value="10">Pengawas</option>
                                                                 </select>
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label for="message-text"
-                                                                    class="col-form-label">Gaji:</label>
+                                                                    class="col-form-label">Rekening:</label>
+                                                                <input disabled type="text"
+                                                                    value="{{ $item->user->no_rek }}"
+                                                                    class="form-control" name="price">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="message-text" class="col-form-label">Uang
+                                                                    Muka:</label>
                                                                 <input type="number" class="form-control"
                                                                     name="price">
+                                                            </div>
+                                                            {{-- bukti bayar --}}
+                                                            <div class="mb-3">
+                                                                <label for="message-text" class="col-form-label">Bukti
+                                                                    Pembayaran:</label>
+                                                                <input type="file" class="form-control"
+                                                                    name="bukti_pembayaran">
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label for="message-text" class="col-form-label">Tanggal
@@ -348,6 +369,7 @@
                                         <th>Judul</th>
                                         <th>Pihak Pekerja</th>
                                         <th>Status</th>
+                                        {{-- <th>Status Pembayaran</th> --}}
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -372,6 +394,18 @@
                                                             aria-hidden="true"></i></span>
                                                 @endif
                                             </td>
+                                            {{-- <td>
+                                                @if ($item->payment_status == 'pending')
+                                                    <span class="badge bg-secondary"><i class="fa fa-times-circle"
+                                                            aria-hidden="true"></i></span>
+                                                @elseif($item->payment_status == 'valid')
+                                                    <span class="badge bg-success"><i class="fa fa-check-circle"
+                                                            aria-hidden="true"></i></span>
+                                                @elseif($item->payment_status == 'invalid')
+                                                    <span class="badge bg-danger"><i class="fa fa-warning"
+                                                            aria-hidden="true"></i></span>
+                                                @endif
+                                            </td> --}}
                                             <td>
                                                 <form action="{{ route('villa.processContract', $item->id) }}"
                                                     onsubmit="return confirm('Apakah anda yakin?')" method="post">

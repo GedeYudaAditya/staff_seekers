@@ -405,10 +405,13 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
 
-            <script>
-                $(document).ready(function() {
-                    $('#table_id2').DataTable();
-                });
-            </script>
-        @endsection
+
+    <script>
+        $(document).ready(function() {
+            $('#table_id2').DataTable();
+        });
+    </script>
+@endsection

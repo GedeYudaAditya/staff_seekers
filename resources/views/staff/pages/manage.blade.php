@@ -192,6 +192,21 @@
                         </div>
                     </div>
                 @endif
+
+                <div class="row mb-3">
+                    <label for="no_rek" class="col-sm-2 col-form-label">no_rek</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control @error('no_rek') is-invalid @enderror" name="no_rek"
+                            id="no_rek" value="{{ auth()->user()->no_rek ? auth()->user()->no_rek : old('no_rek') }}">
+                    </div>
+
+                    @error('no_rek')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+
                 <div class="row mb-3">
                     <label for="password" class="col-sm-2 col-form-label">Password</label>
                     <div class="col-sm-10">
