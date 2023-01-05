@@ -371,7 +371,10 @@ class VillaController extends Controller
 
     public function manageContract()
     {
-        $contracts = Contract::where('villa_id', auth()->user()->id)->get();
+        $contracts = Contract::with('transaction')->where('villa_id', auth()->user()->id)->get();
+
+        // dd transaction payment status
+        // dd($contracts[0]->transaction->payment_status);
 
         // Get all user staff that have accepted the request and user staff that request to join villa
         $staffsRequest = RequestStaff::where('villa_id', auth()->user()->id)
@@ -427,6 +430,7 @@ class VillaController extends Controller
             'signatures_villa' => 'required',
 
             'price' => 'required|numeric',
+            'bukti_pembayaran' => 'required|file|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
 
@@ -456,14 +460,27 @@ class VillaController extends Controller
                 // get total_price + 5% from price
                 $total_price = $request->price + ($request->price * 0.05);
 
+                // store bukti pembayaran
+                if ($request->hasFile('bukti_pembayaran')) {
+                    $file = $request->file('bukti_pembayaran');
+                    $filename = Str::random(10) . '_' . Str::slug($file->getClientOriginalName()) . '.' . $file->getClientOriginalExtension();
+
+                    $path = $file->storeAs('bukti_pembayaran', $filename);
+
+                    $validateData['bukti_pembayaran'] = $filename;
+                    // $validateData['thumbnail_path'] = $path;
+                }
+
                 Transaction::create([
                     'villa_id' => auth()->user()->id,
+                    'slug' => Str::slug(auth()->user()->name . '-' . time()),
                     'contract_id' => $contract->id,
                     'code_transaction' => 'StaffSeekers-' . time(),
                     'price' => $request->price,
                     'total_price' => $total_price,
                     'payment_status' => 'pending',
                     'status' => 'process',
+                    'bukti_pembayaran' => $validateData['bukti_pembayaran'],
                 ]);
 
                 DB::commit();

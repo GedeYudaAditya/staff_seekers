@@ -32,6 +32,7 @@ return new class extends Migration
             $table->string('image_path')->nullable();
             $table->string('cv')->nullable();
             $table->string('cv_path')->nullable();
+            $table->string('no_rek')->nullable();
             $table->string('villa_image')->nullable();
             $table->string('villa_image_path')->nullable();
             $table->timestamp('email_verified_at')->nullable();

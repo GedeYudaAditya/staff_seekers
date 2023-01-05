@@ -27,6 +27,7 @@ class TransactionFactory extends Factory
             'code_transaction' => 'StaffSeekers-' . $this->faker->randomNumber(8),
             'price' => $this->faker->numberBetween(100000, 1000000),
             'total_price' => $this->faker->numberBetween(100000, 1000000),
+            'bukti_pembayaran' => $this->faker->imageUrl(),
             'payment_status' => $this->faker->randomElement(['pending', 'valid', 'invalid']),
             'status' => $this->faker->randomElement(['process', 'send', 'received', 'done']),
         ];

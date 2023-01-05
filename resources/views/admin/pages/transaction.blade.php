@@ -87,6 +87,11 @@
                                                         method="POST">
                                                         @csrf
                                                         <div class="modal-body">
+                                                            <div class="form-control mb-3">
+                                                                <label for="form-control">bukti Pembayaran</label>
+                                                                <img src="{{ asset('storage/bukti_pembayaran/' . $item->bukti_pembayaran) }}"
+                                                                    alt="" class="img-fluid">
+                                                            </div>
                                                             <div class="form-floating">
                                                                 <input class="form-control" type="text"
                                                                     placeholder="Kosong"
@@ -95,7 +100,8 @@
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label for="status" class="form-label">Status</label>
-                                                                <select class="form-select" name="status" id="status">
+                                                                <select class="form-select" name="payment_status"
+                                                                    id="status">
                                                                     <option disabled>-- Status Pembayaran --</option>
                                                                     <option
                                                                         {{ $item->payment_status == 'pending' ? 'selected' : '' }}
