@@ -184,7 +184,7 @@
             <!-- Three columns of text below the carousel -->
             <div class="row">
                 <div class="col-lg-4">
-                    <img src="{{ asset('/img/dev/wicak.png') }}" class="bd-placeholder-img rounded-circle shadow"
+                    <img src="{{ asset('/img/dev/wicak.jpg') }}" class="bd-placeholder-img rounded-circle shadow"
                         width="140" height="140" alt="" srcset="">
                     <hr>
                     <h2 class="fw-normal">Frontend</h2>

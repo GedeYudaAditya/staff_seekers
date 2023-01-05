@@ -41,7 +41,7 @@
     </div> --}}
     <div class="container mt-5">
         <div class="mt-2">
-            <h3>Find Your Job</h3>
+            <h3>Find staffs</h3>
             {{-- Search --}}
             <form action="{{ route('villa.find-staff') }}" method="get">
                 <div class="row">

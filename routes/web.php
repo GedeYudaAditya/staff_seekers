@@ -61,6 +61,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/manage/listReceivedJob/decline/{request:id}', [StaffController::class, 'rejectReceivedJob'])->name('staff.declineReceivedJob');
         Route::post('/manage/contractList/decline/{id}', [StaffController::class, 'declineContract'])->name('staff.declineContract');
         Route::post('/manage/contractList/accept/{id}', [StaffController::class, 'acceptContract'])->name('staff.acceptContract');
+        Route::post('/updateSkill', [StaffController::class, 'updateSkill'])->name('staff.updateSkill');
+        Route::post('/deleteSkill/{announcement:slug}', [StaffController::class, 'deleteSkill'])->name('staff.deleteSkill');
     });
 
 
@@ -116,4 +118,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Action Route
     Route::post('/signout', [AuthController::class, 'signout'])->name('signout');
+
+    // Report
+    Route::post('/reportUser/{user:username}', [GuestController::class, 'reportUser'])->name('report');
+    Route::post('/reportBug', [GuestController::class, 'reportBug'])->name('reportBug');
 });

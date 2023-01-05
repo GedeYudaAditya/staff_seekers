@@ -237,6 +237,69 @@
                     </div>
                 </div>
             </form>
+            <hr>
+            {{-- Update Skill --}}
+            <h3 class="text-center">Skill</h3>
+            {{-- tabel skill --}}
+            <table id="exampleTable" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Title</th>
+                        {{-- <th scope="col">Desc</th> --}}
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($skills as $skill)
+                        <tr>
+                            <th scope="row">{{ $loop->iteration }}</th>
+                            <td>{{ $skill->title }}</td>
+                            {{-- <td>{{ $skill->description }}</td> --}}
+                            <td>
+                                {{-- <a href="{{ route('staff.editSkill', $skill->id) }}" class="btn btn-warning">Edit</a> --}}
+                                <form action="{{ route('staff.deleteSkill', $skill->slug) }}" method="POST"
+                                    class="d-inline">
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            <form action="{{ route('staff.updateSkill') }}" method="POST">
+                @csrf
+                <div class="row my-3">
+                    <label for="title2" class="col-sm-2 col-form-label">Title</label>
+                    <div class="col-sm-10 mb-3">
+                        <input type="text" class="form-control @error('title') is-invalid @enderror" name="title"
+                            id="title2" value="{{ old('title') }}">
+                    </div>
+                    {{-- desc --}}
+                    {{-- <label for="desc" class="col-sm-2 col-form-label">Desc</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control @error('desc') is-invalid @enderror"
+                            name="description" id="desc" value="{{ old('desc') }}">
+                    </div> --}}
+
+                    @error('title')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+                <div class="row mb-3">
+                    <div class="col-sm-10 offset-sm-2">
+                        <button type="submit" class="float-end btn btn-danger" name="submit">Add Skill</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
+    <script>
+        $(document).ready(function() {
+            $('#exampleTable').DataTable();
+        });
+    </script>
 @endsection
