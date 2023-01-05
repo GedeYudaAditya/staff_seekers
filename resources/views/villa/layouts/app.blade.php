@@ -9,7 +9,7 @@
     @include('villa.layouts._css')
 </head>
 
-<body>
+<body class="pb-0">
     @include('villa.layouts._nav')
 
     {{-- <div class="container-fluid p-0">
@@ -18,6 +18,8 @@
     <div class="container-fluid p-0">
         @yield('content')
     </div>
+
+    @include('__footer')
 
     @include('villa.layouts._js')
 </body>

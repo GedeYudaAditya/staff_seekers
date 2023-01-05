@@ -5,8 +5,8 @@
         <br>
         <span class="welcome text-danger">Welcome to Staff Seekers</span>
 
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet cum veritatis aliquam modi quidem libero.
-            Maiores, quaerat unde saepe harum architecto est! Dicta tempore aut autem perferendis est. Eius, ducimus.
+        <p>
+            Website yang dikhususkan untuk mencari staff villa yang sesuai dengan kebutuhan anda.
         </p>
     </div>
     <div class="col-md-7">
@@ -22,27 +22,27 @@
             </div>
             <div class="carousel-inner h-100 rounded">
                 <div class="h-100 rounded carousel-item active">
-                    <img src="https://source.unsplash.com/1600x900/?nature,water" class="d-block w-100 rounded"
-                        alt="...">
+                    <img src="{{ asset('/img/slider/kemudahan.jpg') }}" class="d-block w-100 rounded"
+                        style="filter: brightness(0.5)" alt="...">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>First slide label</h5>
-                        <p>Some representative placeholder content for the first slide.</p>
+                        <h5 class="text-slide">Menawarkan Kemudahan</h5>
+                        <p>Informasi tentang staff dapat ditemukan dengan mudah</p>
                     </div>
                 </div>
                 <div class="h-100 rounded carousel-item">
-                    <img src="https://source.unsplash.com/1600x900/?nature,water" class="d-block w-100 rounded"
-                        alt="...">
+                    <img src="{{ asset('/img/slider/untung.jpg') }}" class="d-block w-100 rounded"
+                        style="filter: brightness(0.5)" alt="...">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>Second slide label</h5>
-                        <p>Some representative placeholder content for the second slide.</p>
+                        <h5 class="text-slide">Lebih untung</h5>
+                        <p>Staff mendapatkan biaya sewa awal setelah dilaksanakan kontrak</p>
                     </div>
                 </div>
                 <div class="h-100 rounded carousel-item">
-                    <img src="https://source.unsplash.com/1600x900/?nature,water" class="d-block w-100 rounded"
-                        alt="...">
+                    <img src="{{ asset('/img/slider/komunikasi.jpg') }}" class="d-block w-100 rounded"
+                        style="filter: brightness(0.5)" alt="...">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>Third slide label</h5>
-                        <p>Some representative placeholder content for the third slide.</p>
+                        <h5 class="text-slide">Komunikasi 2 arah</h5>
+                        <p>Pihak staff dapat mengajukan lamaran dengan mudah ke villa favorit.</p>
                     </div>
                 </div>
             </div>

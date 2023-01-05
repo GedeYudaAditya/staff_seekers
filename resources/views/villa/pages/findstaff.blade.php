@@ -43,7 +43,7 @@
         <div class="mt-2">
             <h3>Find Your Job</h3>
             {{-- Search --}}
-            <form action="{{ route('staff.find-job') }}" method="get">
+            <form action="{{ route('villa.find-staff') }}" method="get">
                 <div class="row">
                     <div class="col-md-4">
                         <div class="input-group mb-3">
