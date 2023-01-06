@@ -144,7 +144,7 @@ class StaffController extends Controller
     {
         $validateData = request()->validate([
             'title' => 'required',
-            'description' => 'required'
+            // 'description' => 'required'
         ]);
 
         try {
@@ -154,7 +154,7 @@ class StaffController extends Controller
                 'user_id' => auth()->user()->id,
                 'slug' => Str::slug($validateData['title'] . '-' . auth()->user()->username),
                 'title' => $validateData['title'],
-                'description' => $validateData['description'],
+                // 'description' => $validateData['description'],
                 'hiring' => false
             ]);
 

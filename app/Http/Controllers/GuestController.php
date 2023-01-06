@@ -57,14 +57,14 @@ class GuestController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            // 'description' => 'required',
+            'description' => 'required',
         ]);
 
         Report::create([
             'user_id' => auth()->user()->id,
             'slug' => Str::slug($request->title) . '-' . Str::random(5),
             'title' => $request->title,
-            // 'description' => $request->description,
+            'description' => $request->description,
             'type' => 'bug',
             'status' => 'pending',
         ]);
