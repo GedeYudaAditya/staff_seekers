@@ -245,8 +245,8 @@
                                                             aria-label="Close"></button>
                                                     </div>
                                                     <form
-                                                        action="{{ route('villa.createContract', $item->user->username) }}"
-                                                        method="POST">
+                                                        action="{{ route('villa.createContract', $item->staff->username) }}"
+                                                        method="POST" enctype="multipart/form-data">
                                                         <div class="modal-body">
                                                             @csrf
                                                             <div class="mb-3">
@@ -259,18 +259,18 @@
                                                                     Staff:</label>
                                                                 <input type="text" class="form-control"
                                                                     id="recipient-name{{ $item->id }}"
-                                                                    value="{{ $item->user->name }}" disabled>
+                                                                    value="{{ $item->staff->name }}" disabled>
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label for="message-text"
                                                                     class="col-form-label">Alamat:</label>
-                                                                <textarea class="form-control" id="message-text{{ $item->id }}" disabled>{{ $item->user->address }}</textarea>
+                                                                <textarea class="form-control" id="message-text{{ $item->id }}" disabled>{{ $item->staff->address }}</textarea>
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label for="message-text"
                                                                     class="col-form-label">CV:</label>
                                                                 <a class="btn btn-primary btn-sm"
-                                                                    href="{{ asset('storage/cv/' . $item->user->cv) }}"
+                                                                    href="{{ asset('storage/cv/' . $item->staff->cv) }}"
                                                                     target="_blank">Lihat CV</a>
                                                             </div>
                                                             <div class="mb-3">
@@ -292,7 +292,7 @@
                                                                 <label for="message-text"
                                                                     class="col-form-label">Rekening:</label>
                                                                 <input disabled type="text"
-                                                                    value="{{ $item->user->no_rek }}"
+                                                                    value="{{ $item->staff->no_rek }}"
                                                                     class="form-control" name="price">
                                                             </div>
                                                             <div class="mb-3">
