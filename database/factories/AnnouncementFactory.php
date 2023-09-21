@@ -24,7 +24,7 @@ class AnnouncementFactory extends Factory
             'title' => fake()->sentence(3),
             'hiring' => fake()->boolean,
             'slug' => fake()->slug,
-            'thumbnail' => fake()->imageUrl(640, 480, 'people'),
+            'thumbnail' => 'default.png',
         ];
     }
 }

@@ -69,11 +69,14 @@ class VillaController extends Controller
 
         $staffRequest = $staffRequest ? $staffRequest->status : 'null';
 
+        $skills = Announcement::where('user_id', $user->id)->get();
+
         return view('villa.pages.staff_desc', [
             'title' => 'Detail Staff',
             'active' => 'villa.find-staff',
             'staff' => $user,
-            'staffRequest' => $staffRequest
+            'staffRequest' => $staffRequest,
+            'skills' => $skills
         ]);
     }
 

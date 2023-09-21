@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Announcement;
 use App\Models\RequestStaff;
 use App\Models\RequestVilla;
 use App\Models\User;
@@ -39,6 +40,7 @@ class StaffController extends Controller
     public function desc(User $user)
     {
         $userRequest = RequestStaff::where('user_id', auth()->user()->id)->where('villa_id', $user->id)->first();
+        $villaRequire = Announcement::where('user_id', $user->id)->where('hiring', true)->get();
 
         $userRequest = $userRequest ? $userRequest->status : 'null';
 
@@ -48,7 +50,8 @@ class StaffController extends Controller
             'title' => 'Detail Villa',
             'active' => 'staff.find-job',
             'villa' => $user,
-            'userRequest' => $userRequest
+            'userRequest' => $userRequest,
+            'villaRequire' => $villaRequire
         ]);
     }
 
@@ -56,11 +59,13 @@ class StaffController extends Controller
     {
         $requestedJob = RequestStaff::where('user_id', auth()->user()->id)->count();
         $receivedJob = RequestVilla::where('staff_id', auth()->user()->id)->count();
+        $skills = Announcement::where('user_id', auth()->user()->id)->get();
         return view('staff.pages.manage', [
             'title' => 'Manage',
             'active' => 'staff.manage',
             'requestedJob' => $requestedJob,
-            'receivedJob' => $receivedJob
+            'receivedJob' => $receivedJob,
+            'skills' => $skills
         ]);
     }
 
@@ -129,6 +134,49 @@ class StaffController extends Controller
             DB::commit();
 
             return redirect()->back()->with('success', 'Profile updated successfully');
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
+    public function updateSkill()
+    {
+        $validateData = request()->validate([
+            'title' => 'required',
+            // 'description' => 'required'
+        ]);
+
+        try {
+            DB::beginTransaction();
+
+            Announcement::create([
+                'user_id' => auth()->user()->id,
+                'slug' => Str::slug($validateData['title'] . '-' . auth()->user()->username),
+                'title' => $validateData['title'],
+                // 'description' => $validateData['description'],
+                'hiring' => false
+            ]);
+
+            DB::commit();
+
+            return redirect()->back()->with('success', 'Skill updated successfully');
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
+    public function deleteSkill(Announcement $announcement)
+    {
+        try {
+            DB::beginTransaction();
+
+            $announcement->delete();
+
+            DB::commit();
+
+            return redirect()->back()->with('success', 'Skill deleted successfully');
         } catch (\Throwable $e) {
             DB::rollBack();
             return redirect()->back()->with('error', $e->getMessage());

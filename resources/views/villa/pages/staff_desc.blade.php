@@ -29,15 +29,37 @@
                     <div class="text-center">
                         <p>{{ $staff->salary }}</p>
                     </div>
-                    <div class="col-lg-3 py-2 text-center w-100">
-                        <h6>Preferred job</h6>
-                        <div class="container d-flex justify-content-evenly">
-                            <div>
-                                <i class="fas fa-user-tie fa-fw me-4"></i>Manager</li>
-                            </div>
-                            <div>
-                                <i class="fas fa-solid fa-person-swimming fa-fw me-4"></i>Poolman</li>
-                            </div>
+                    <h6>Skill</h6>
+                    {{-- card text --}}
+                    <div class="card-text">
+                        <div class="row justify-content-center mx-3">
+                            @forelse ($skills as $skill)
+                                <div class="col-md-4">
+                                    <div class="card" style="width: 18rem;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">
+                                                {{ $skill->title }}
+                                            </h5>
+                                            {{-- <p class="card-text">
+                                                {{ $skill->pivot->description }}
+                                            </p> --}}
+                                        </div>
+                                    </div>
+                                </div>
+                            @empty
+                                <div class="col-md-4">
+                                    <div class="card" style="width: 18rem;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">
+                                                No Skill
+                                            </h5>
+                                            {{-- <p class="card-text">
+                                                {{ $skill->pivot->description }}
+                                            </p> --}}
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforelse
                         </div>
                     </div>
                     <div class="mt-3">
@@ -54,35 +76,45 @@
                         <p><i class="fas fa-solid fa-person-swimming fa-fw me-2"></i>Curriculum vitae</p>
                     </a> --}}
                     </div>
-                    <div class="button d-grid py-5">
+                    <div class="button row py-5 jsutify-content-center">
                         <form action="{{ route('villa.requestStaff', $staff->username) }}" method="post">
                             {{-- notif --}}
                             @if (session('success'))
-                                <div class="alert alert-success">
+                                <div class="alert alert-success col-6">
                                     {{ session('success') }}
                                 </div>
                             @endif
                             @if (session('error'))
-                                <div class="alert alert-danger">
+                                <div class="alert alert-danger col-6">
                                     {{ session('error') }}
                                 </div>
                             @endif
                             @csrf
                             @if ($staffRequest == 'null')
-                                <button type="submit" class="btn btn-danger">Hire Staff</button>
+                                <button type="submit" class="btn btn-danger col-md-3">Hire Staff</button>
                             @else
                                 @if ($staffRequest == 'rejected')
-                                    <button type="submit" class="btn btn-danger">Hire Staff</button>
+                                    <button type="submit" class="btn btn-danger col-md-3">Hire Staff</button>
                                 @else
-                                    <button type="submit" class="btn btn-danger" disabled>Hire Staff</button>
+                                    <button type="submit" class="btn btn-danger col-md-3" disabled>Hire Staff</button>
                                 @endif
                             @endif
+                            <a target="blank"
+                                href="https://wa.me/{{ $staff->phone }}?text=Halo%20{{ $staff->name }},%20Saya%20{{ auth()->user()->name }}%20ingin%20menawarkan%20pekerjaan%20untuk%20villa%20{{ auth()->user()->villa_name }}"
+                                class="btn btn-success col-md-3">Hubungi</a>
+
+                            {{-- Modal Lapor Button --}}
+                            <button type="button" class="btn btn-warning col-md-3" data-bs-toggle="modal"
+                                data-bs-target="#reportModal">
+                                Lapor
+                            </button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-        {{-- <div class="container mt-5">
+    </div>
+    {{-- <div class="container mt-5">
         <div class="description w-100 text-center">
             <div class="mt-5">
                 <h5>{{ $staff->staff_name }}</h5>
@@ -130,4 +162,29 @@
             </div>
         </div>
     </div> --}}
-    @endsection
+    {{-- Report Modal --}}
+    <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="reportModalLabel">Lapor</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('report', $staff->username) }}" method="post">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Judul</label>
+                            <input type="text" class="form-control" id="name" name="title">
+                        </div>
+                        <div class="mb-3">
+                            <label for="report" class="form-label">Laporan</label>
+                            <textarea class="form-control" id="report" name="description" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection

@@ -45,7 +45,7 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('staff'),
             'bio' => 'I am a staff',
             'detailBio' => 'detail bio staff',
-            'salary' => '1000000 - 2000000',
+            'salary' => 'Rp. 1000000 ~ Rp. 2000000',
             'image' => 'default.png',
             'address' => 'Jl. Kebon Jeruk No. 1, Jakarta Barat',
             'phone' => '081234567890'
@@ -62,7 +62,7 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('villa'),
             'bio' => 'I am a villa',
             'detailBio' => 'detail bio villa',
-            'salary' => '1000000 - 2000000',
+            'salary' => 'Rp. 1000000 ~ Rp. 2000000',
             'image' => 'default.png',
             'villa_image' => 'default.png',
             'address' => 'Jl. Kebon Jeruk No. 1, Jakarta Barat',
@@ -78,8 +78,8 @@ class DatabaseSeeder extends Seeder
 
         Report::factory(100)->create();
 
-        Contract::factory(30)->create();
+        // Contract::factory(30)->create();
 
-        Transaction::factory(30)->create();
+        // Transaction::factory(30)->create();
     }
 }
